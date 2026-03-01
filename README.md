@@ -31,6 +31,98 @@ AI changes the economics of this problem. What used to require a senior develope
 
 ---
 
+## Quick Start
+
+### Option 1: Use the Prompt Templates (Any AI Tool)
+
+1. Clone this repo
+2. Open the `prompts/` directory
+3. Start with `00-define-requirements.md` to establish your refactoring goals
+4. Continue with `01-project-metadata.md` — copy the prompt, paste it into your AI tool along with your project files
+5. Work through the prompts sequentially (01 → 09), feeding outputs from earlier steps as context for later ones
+6. Use the specialized `03a-03d` prompts for deeper analysis of specific file types
+
+### Option 2: Use the Scripts + Prompts
+
+1. Clone this repo
+2. Run the analysis scripts against your project:
+   ```bash
+   ./scripts/analyze-project.sh /path/to/your/project
+   ./scripts/map-file-structure.sh /path/to/your/project
+   ./scripts/generate-file-summaries.sh /path/to/your/project
+   ./scripts/capture-baselines.sh /path/to/your/project
+   ```
+3. Feed the script outputs into the prompt templates for deeper analysis
+
+### Option 3: Install Claude Code Skills
+
+**Prerequisites:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) must be installed on your system.
+
+**Recommended approach — clone the full repo alongside your project:**
+
+```bash
+# Clone Refactor Pilot somewhere accessible
+git clone https://github.com/GuilhermeVozniak/refactor-pilot-framework.git ~/refactor-pilot-framework
+
+# From your project directory, copy the skills into .claude/skills/
+cp -r ~/refactor-pilot-framework/skills/ /path/to/your/project/.claude/skills/
+
+# Also copy the scripts (skills reference them)
+cp -r ~/refactor-pilot-framework/scripts/ /path/to/your/project/scripts/
+```
+
+**Minimal approach — copy just the skills into your project:**
+
+```bash
+# Create the Claude Code skills directory in your project
+mkdir -p /path/to/your/project/.claude/skills
+
+# Copy all four skills
+cp -r skills/analyze-codebase /path/to/your/project/.claude/skills/
+cp -r skills/generate-tests   /path/to/your/project/.claude/skills/
+cp -r skills/refactor-code    /path/to/your/project/.claude/skills/
+cp -r skills/verify-changes   /path/to/your/project/.claude/skills/
+```
+
+**Verify the installation** — your project structure should look like:
+
+```
+your-project/
+├── .claude/
+│   └── skills/
+│       ├── analyze-codebase/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       ├── generate-tests/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       ├── refactor-code/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       └── verify-changes/
+│           ├── SKILL.md
+│           └── references/
+├── src/
+└── ...
+```
+
+Once installed, open Claude Code in your project and trigger skills naturally — say "analyze this codebase" or "generate tests for this module" and Claude will use the corresponding skill.
+
+**Note:** The skills reference automation scripts (`scripts/`) and prompt templates (`prompts/`) from this repo. For the full experience, keep the cloned repo accessible or copy those directories into your project as well.
+
+See [agents.md](agents.md) for the full skill registry, details on each skill, and alternative installation methods.
+
+### Option 4: Use with Cursor, Windsurf, or Other AI Editors
+
+The prompt templates and methodology work with any AI-powered editor:
+
+1. Clone this repo
+2. Open the `prompts/` directory as a reference
+3. When using your AI editor's chat or inline features, copy the relevant prompt template and paste your code alongside it
+4. The `docs/` guides explain the methodology — read them to understand the workflow even if your tool doesn't support skills directly
+
+---
+
 ## The Four Phases
 
 ```
@@ -187,98 +279,6 @@ refactor-pilot-framework/
     ├── run-tests.sh                   # 85 assertions across all scripts
     └── fixtures/                      # Test fixtures (Node.js, Python, empty projects)
 ```
-
----
-
-## Quick Start
-
-### Option 1: Use the Prompt Templates (Any AI Tool)
-
-1. Clone this repo
-2. Open the `prompts/` directory
-3. Start with `00-define-requirements.md` to establish your refactoring goals
-4. Continue with `01-project-metadata.md` — copy the prompt, paste it into your AI tool along with your project files
-5. Work through the prompts sequentially (01 → 09), feeding outputs from earlier steps as context for later ones
-6. Use the specialized `03a-03d` prompts for deeper analysis of specific file types
-
-### Option 2: Use the Scripts + Prompts
-
-1. Clone this repo
-2. Run the analysis scripts against your project:
-   ```bash
-   ./scripts/analyze-project.sh /path/to/your/project
-   ./scripts/map-file-structure.sh /path/to/your/project
-   ./scripts/generate-file-summaries.sh /path/to/your/project
-   ./scripts/capture-baselines.sh /path/to/your/project
-   ```
-3. Feed the script outputs into the prompt templates for deeper analysis
-
-### Option 3: Install Claude Code Skills
-
-**Prerequisites:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) must be installed on your system.
-
-**Recommended approach — clone the full repo alongside your project:**
-
-```bash
-# Clone Refactor Pilot somewhere accessible
-git clone https://github.com/GuilhermeVozniak/refactor-pilot-framework.git ~/refactor-pilot-framework
-
-# From your project directory, copy the skills into .claude/skills/
-cp -r ~/refactor-pilot-framework/skills/ /path/to/your/project/.claude/skills/
-
-# Also copy the scripts (skills reference them)
-cp -r ~/refactor-pilot-framework/scripts/ /path/to/your/project/scripts/
-```
-
-**Minimal approach — copy just the skills into your project:**
-
-```bash
-# Create the Claude Code skills directory in your project
-mkdir -p /path/to/your/project/.claude/skills
-
-# Copy all four skills
-cp -r skills/analyze-codebase /path/to/your/project/.claude/skills/
-cp -r skills/generate-tests   /path/to/your/project/.claude/skills/
-cp -r skills/refactor-code    /path/to/your/project/.claude/skills/
-cp -r skills/verify-changes   /path/to/your/project/.claude/skills/
-```
-
-**Verify the installation** — your project structure should look like:
-
-```
-your-project/
-├── .claude/
-│   └── skills/
-│       ├── analyze-codebase/
-│       │   ├── SKILL.md
-│       │   └── references/
-│       ├── generate-tests/
-│       │   ├── SKILL.md
-│       │   └── references/
-│       ├── refactor-code/
-│       │   ├── SKILL.md
-│       │   └── references/
-│       └── verify-changes/
-│           ├── SKILL.md
-│           └── references/
-├── src/
-└── ...
-```
-
-Once installed, open Claude Code in your project and trigger skills naturally — say "analyze this codebase" or "generate tests for this module" and Claude will use the corresponding skill.
-
-**Note:** The skills reference automation scripts (`scripts/`) and prompt templates (`prompts/`) from this repo. For the full experience, keep the cloned repo accessible or copy those directories into your project as well.
-
-See [agents.md](agents.md) for the full skill registry, details on each skill, and alternative installation methods.
-
-### Option 4: Use with Cursor, Windsurf, or Other AI Editors
-
-The prompt templates and methodology work with any AI-powered editor:
-
-1. Clone this repo
-2. Open the `prompts/` directory as a reference
-3. When using your AI editor's chat or inline features, copy the relevant prompt template and paste your code alongside it
-4. The `docs/` guides explain the methodology — read them to understand the workflow even if your tool doesn't support skills directly
 
 ---
 
