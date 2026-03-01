@@ -93,6 +93,21 @@ measurements (codebase size, build output, dependencies, code quality indicators
 
 Save as `refactor-notes/baselines.md`.
 
+### Step 5b: Security-Aware Analysis
+
+Scan the codebase for security concerns that should be addressed during refactoring:
+
+- Deprecated APIs with known vulnerabilities
+- Unsafe constructs (raw pointers, unvalidated buffers, deserialization of untrusted data)
+- Injection vectors (unsanitized inputs in SQL, shell commands, templates)
+- Hardcoded secrets (API keys, passwords, tokens in source files)
+- Overly permissive error handling that leaks internal details
+
+Classify each issue as CRITICAL, HIGH, MEDIUM, or LOW. Include file, line, and suggested fix.
+Feed this into the refactor plan in Phase 2.
+
+Save as `refactor-notes/05-security-analysis.md`.
+
 ### Step 6: Project Summary
 
 Synthesize all outputs into a single document covering:

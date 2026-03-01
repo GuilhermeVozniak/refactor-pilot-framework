@@ -184,6 +184,32 @@ and dependency direction. Group files by feature area or layer.
 
 This is especially valuable when onboarding new developers or getting team buy-in for the refactor plan.
 
+## Step 9: Security-Aware Analysis
+
+Ask AI to scan the codebase for security issues that should be addressed during refactoring. This goes beyond dependency vulnerability scanning — it examines the code itself for patterns that introduce risk.
+
+**What to look for:**
+
+- **Deprecated APIs** — Functions that still work but have known security issues (e.g., `gets()` in C, `getVersion()` in Windows API, `md5` for password hashing). AI is particularly good at spotting these because it knows deprecation timelines across languages.
+- **Unsafe constructs** — Raw pointers, unsafe memory operations, unvalidated buffer access, deserialization of untrusted data. In Rust, these live in explicit `unsafe` blocks; in C/C++, they're everywhere.
+- **Injection vectors** — Unsanitized user inputs passed to SQL queries, shell commands, file paths, or HTML templates.
+- **Hardcoded secrets** — API keys, passwords, tokens, or connection strings embedded in source code.
+- **Overly permissive error handling** — Catch-all blocks that swallow errors silently, or error messages that leak internal details to users.
+
+**Prompt:**
+```
+Analyze this codebase for security concerns that should be addressed during refactoring.
+For each issue found, classify it as:
+- CRITICAL: Must fix during this refactor (injection vectors, hardcoded secrets)
+- HIGH: Should fix during this refactor (deprecated APIs with known vulnerabilities)
+- MEDIUM: Fix if scope permits (unsafe constructs that have safe alternatives)
+- LOW: Note for future work (overly broad error handling, missing input validation)
+
+For each issue, provide the file, line, the problem, and a suggested fix.
+```
+
+Feed the output into your refactor plan in Phase 2 — security fixes become explicit steps in the plan rather than afterthoughts.
+
 ## Tips for Phase 1
 
 **Scope your analysis.** For large codebases, don't try to analyze everything at once. Pick a module, feature, or directory and start there.

@@ -95,6 +95,39 @@ Big-bang refactors (rewriting an entire module at once) are high-risk. Increment
 - You can stop at any point and the code is still functional
 - Team members can review in parallel
 
+## Branch-Per-Solution Strategy
+
+When a refactoring task has multiple viable approaches, don't debate in a document — prototype each approach in its own branch and compare results.
+
+**The workflow:**
+
+1. Create a branch for each approach: `solution/extract-hooks`, `solution/hoc-pattern`, `solution/render-props`
+2. Implement the refactor in each branch (this is where AI speed shines — trying three approaches takes minutes instead of days)
+3. Run the test suite and benchmarks on each branch
+4. Compare results: code quality, performance, readability, maintainability
+5. Merge the winner into your main refactoring branch
+6. Keep the other branches around for reference until the refactor ships
+
+**Why this works:** AI makes each attempt cheap. Instead of committing to an approach upfront and discovering problems late, you test multiple approaches early and pick the best one with real data. This is especially valuable for cross-language migrations, where the first approach might compile but produce non-idiomatic code, while a second approach might be cleaner overall.
+
+**Git workflow:**
+```bash
+# Start from your main refactoring branch
+git checkout refactor/user-profile
+
+# Create solution branches
+git checkout -b solution/approach-a
+# ... implement approach A, run tests, benchmark ...
+
+git checkout refactor/user-profile
+git checkout -b solution/approach-b
+# ... implement approach B, run tests, benchmark ...
+
+# Compare and merge the winner
+git checkout refactor/user-profile
+git merge solution/approach-a
+```
+
 ## Prompt Engineering for Refactoring
 
 **Be specific about what you want:**
@@ -128,6 +161,24 @@ Provide the refactored code with:
 - A list of any new dependencies or types needed
 - Notes on any behavior differences from the original
 ```
+
+## Security as a Refactoring Goal
+
+Refactoring is one of the best opportunities to improve code security — you're already reading and restructuring the code, so fixing security issues along the way costs almost nothing extra.
+
+**Make it part of the workflow, not an afterthought.** Phase 1 should include a security-aware analysis step (see [Phase 1, Step 9](phase-1-gather-insights.md#step-9-security-aware-analysis)). The output feeds into the refactor plan in Phase 2, so security fixes become explicit plan steps with their own tests.
+
+**AI is good at spotting deprecated APIs.** AI models have broad knowledge of API deprecation timelines across languages and frameworks. When you ask AI to explain potential problems with a codebase, it will often surface deprecated functions, unsafe patterns, and known vulnerability classes that a human might miss — especially in languages or frameworks the developer doesn't use daily.
+
+**Common security improvements during refactoring:**
+- Replacing deprecated crypto functions with current alternatives
+- Adding input validation to functions that accept user data
+- Replacing string concatenation with parameterized queries
+- Moving hardcoded secrets to environment variables
+- Wrapping unsafe operations with proper error handling and bounds checking
+- Replacing permissive CORS or access control configurations with restrictive defaults
+
+**Don't try to fix everything at once.** Classify security issues by severity (critical, high, medium, low) and address critical and high issues in the current refactor cycle. Medium and low issues go into the backlog for future work.
 
 ## When NOT to Use AI for Refactoring
 

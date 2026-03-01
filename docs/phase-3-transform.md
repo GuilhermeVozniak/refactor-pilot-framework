@@ -119,6 +119,23 @@ Transform in multiple passes:
 
 Each pass is smaller and easier to review.
 
+### Approach D: Cross-Language Migration
+
+When the goal is to move code from one language to another — Python 2 to Python 3, JavaScript to TypeScript, C to Rust, Java to Kotlin — the process requires extra steps beyond a normal refactor.
+
+**Step 1: Understand the source.** Before any migration, ask AI to explain the original code thoroughly. Pay attention to language-specific features that don't have a direct equivalent in the target: preprocessor directives, unsafe memory operations, dynamic typing patterns, implicit conversions, or platform-specific APIs.
+
+**Step 2: Identify migration risks.** Ask AI to list potential problems with the migration. This typically surfaces deprecated APIs, platform-specific behavior, unsafe constructs, and idioms that translate poorly. The video demo of C→Rust migration found that certain constants weren't available on macOS and that unsafe blocks were required for Windows API calls — these are the kinds of issues you want surfaced before writing any code.
+
+**Step 3: Migrate and iterate.** The first generated version rarely compiles or runs cleanly. Expect multiple passes:
+1. Initial migration → compile/build → fix errors from missing dependencies, unavailable APIs, or type mismatches
+2. Safety and idiom pass → replace non-idiomatic code with target-language best practices (e.g., replace raw pointers with safe abstractions, replace dynamic types with proper type annotations)
+3. Error handling pass → add proper error handling using target-language patterns (e.g., Rust's `Result` type, TypeScript's strict null checks, Python 3's exception chaining)
+
+**Step 4: Test on all target platforms.** Cross-language migrations often involve cross-platform code. Build and test on every platform the code supports — don't assume that compiling on one OS means it works everywhere.
+
+**Branch strategy for migrations:** Create a dedicated branch for the migration (e.g., `migrate/js-to-ts` or `refactor/py2-to-py3`). Keep the original code available on `main` until the migration is validated. See the branch-per-solution strategy in [Best Practices](best-practices.md#branch-per-solution) for the full workflow.
+
 ## Tips for Phase 3
 
 **Review AI output line by line.** Don't just check if tests pass. Read the code. AI sometimes produces correct but overly complex solutions, or introduces patterns that don't match your team's style.
@@ -132,6 +149,8 @@ Each pass is smaller and easier to review.
 **Don't refactor tests in the same step.** Keep the original tests running against refactored code first. Once everything passes, you can clean up the test code in a separate step.
 
 **Use AI to explain its changes.** If a refactored section looks different from what you expected, ask AI to explain its reasoning. Sometimes it found a better approach; sometimes it misunderstood the requirement.
+
+**Try multiple approaches in parallel branches.** When a refactoring task has more than one reasonable approach, create a branch for each (e.g., `solution/approach-a`, `solution/approach-b`), implement both with AI, run tests and benchmarks, then merge the winner. AI makes each attempt fast and cheap. See [Best Practices](best-practices.md#branch-per-solution) for the full workflow.
 
 ## The "Explain Your Decisions" Pattern
 

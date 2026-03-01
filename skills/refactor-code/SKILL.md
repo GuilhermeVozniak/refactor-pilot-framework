@@ -36,6 +36,7 @@ What type of refactoring?
 ├── Extract shared logic → Start with Pass 1
 ├── Modernize patterns → Start with Pass 2
 ├── Reorganize structure → Start with Pass 3
+├── Cross-language migration → Use Migration workflow below
 └── Full refactor → Execute all three passes in order
 ```
 
@@ -96,6 +97,23 @@ After each pass, explain:
 3. Alternative approaches you considered and why you chose this one
 4. Assumptions you made about the codebase or requirements
 5. Areas where you are least confident about the change
+
+## Migration Workflow (Cross-Language)
+
+When converting code from one language to another (JS→TS, Python 2→3, C→Rust, Java→Kotlin):
+
+1. **Explain first:** Analyze the source code and list language-specific features, platform
+   dependencies, and constructs that don't directly translate.
+2. **Identify risks:** Surface deprecated APIs, unsafe operations, missing equivalents,
+   and platform-specific behavior before generating any target code.
+3. **Migrate iteratively:**
+   - First pass: generate target-language code → build → fix compilation errors
+   - Second pass: replace non-idiomatic patterns with target-language best practices
+   - Third pass: add proper error handling using target-language conventions
+4. **Test on all target platforms.** Cross-language code often involves cross-platform concerns.
+
+Create a dedicated branch for the migration (e.g., `migrate/js-to-ts`). Keep original
+code on `main` until migration is validated.
 
 ## Output
 
