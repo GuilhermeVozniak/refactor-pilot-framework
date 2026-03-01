@@ -1,0 +1,168 @@
+# Best Practices for AI-Assisted Refactoring
+
+This guide covers the principles and guardrails that make AI-assisted refactoring safe, effective, and repeatable.
+
+## Treat AI as a Junior Developer
+
+AI is fast, tireless, and has read more code than any human ever will. But it lacks judgment. It doesn't understand your business context, your team's conventions, or the political reasons why that one function is structured the way it is.
+
+Your role is senior developer and code reviewer. AI writes the code. You decide if it's correct.
+
+## The Context Window Is Everything
+
+The quality of AI's output is directly proportional to the quality of context you provide. This is why Phase 1 (Gather Insights) exists — every minute spent building context saves ten minutes of correcting bad output.
+
+**Good context includes:**
+- The original source code
+- Type definitions and interfaces
+- Related utility files
+- Test files showing expected behavior
+- The refactor plan with explicit goals
+- Project conventions and coding standards
+
+**Bad context includes:**
+- Entire repository dumps (too much noise)
+- Vague instructions ("make this better")
+- Conflicting requirements in the same prompt
+
+## Start Small, Build Confidence
+
+Don't start with your most critical production service. Begin with:
+
+1. **Personal projects** — zero risk, maximum learning
+2. **Internal tools** — low stakes, real complexity
+3. **Non-critical features** — production exposure, manageable blast radius
+4. **Core systems** — only after you've built confidence with the process
+
+## Security and Sensitivity
+
+**Code you should NOT send to external AI services:**
+- Authentication and authorization logic
+- Cryptographic implementations
+- Code containing API keys, tokens, or secrets (even in comments)
+- Proprietary algorithms that are competitive advantages
+- Code covered by NDA or regulatory requirements (HIPAA, SOX, PCI)
+
+**Alternatives for sensitive code:**
+- Use local models (Ollama + CodeLlama, LM Studio)
+- Use enterprise AI services with data protection agreements
+- Anonymize sensitive parts before sending (replace real API names, strip secrets)
+- Use the analysis prompts locally and only send sanitized summaries to external AI
+
+## Inspect Every Diff
+
+Before committing AI-generated code, review it as carefully as you would a junior developer's pull request.
+
+**Things to watch for:**
+- New dependencies added without discussion
+- Changed public API signatures
+- Removed error handling
+- Altered business logic (especially edge cases)
+- Performance regressions (e.g., N+1 queries, unnecessary re-renders)
+- Security issues (unsanitized inputs, SQL injection vectors)
+- Hallucinated imports (packages that don't exist)
+- Over-engineering (AI sometimes produces unnecessarily complex solutions)
+
+## Validate Inputs and Outputs
+
+For every module you refactor, verify the contract:
+
+**Input validation:**
+- Does the refactored function accept the same parameter types?
+- Does it handle null, undefined, empty, and boundary values the same way?
+- Does it throw the same errors for invalid inputs?
+
+**Output validation:**
+- Does it return the same data structure?
+- Does it produce the same results for known inputs?
+- Does it maintain the same side effects (API calls, state mutations, events)?
+
+Property-based testing and snapshot testing are valuable tools here.
+
+## Incremental Over Big-Bang
+
+Big-bang refactors (rewriting an entire module at once) are high-risk. Incremental refactoring (one small change at a time, each tested and committed) is safer and easier to review.
+
+**Incremental approach:**
+1. Extract one utility function → test → commit
+2. Convert one pattern → test → commit
+3. Reorganize one file → test → commit
+4. Repeat until done
+
+**Benefits:**
+- Each commit is small and reviewable
+- If something breaks, you know exactly which change caused it
+- You can stop at any point and the code is still functional
+- Team members can review in parallel
+
+## Prompt Engineering for Refactoring
+
+**Be specific about what you want:**
+```
+# Bad
+Refactor this code to be better.
+
+# Good
+Convert this React class component to a functional component using hooks.
+Extract the form validation logic into a separate utility function.
+Preserve the existing error handling behavior.
+Use the project's existing patterns from utils/validation.ts as a reference.
+```
+
+**Provide the "why" alongside the "what":**
+```
+# Bad
+Remove the global variable.
+
+# Good
+Remove the global variable `currentUser` because it causes race conditions
+when multiple components read and write to it simultaneously. Replace it
+with a React Context that provides the user object to the component tree.
+```
+
+**Specify output format:**
+```
+Provide the refactored code with:
+- Inline comments explaining non-obvious changes
+- A summary of what changed and why
+- A list of any new dependencies or types needed
+- Notes on any behavior differences from the original
+```
+
+## When NOT to Use AI for Refactoring
+
+AI-assisted refactoring isn't always the right tool:
+
+- **Performance-critical hot paths** — AI might produce correct but slower code. Benchmark carefully.
+- **Complex algorithmic code** — If the original algorithm is intricate, AI might simplify it incorrectly.
+- **Code with undocumented edge cases** — If behavior depends on subtle bugs that users rely on, AI will "fix" them.
+- **Cross-system refactors** — If the refactor spans multiple services, databases, and APIs, AI can't see the full picture.
+- **Regulatory compliance code** — Code governed by audit requirements needs human review at every step.
+
+In these cases, use AI for analysis and planning (Phases 1-2) but do the transformation (Phase 3) manually.
+
+## Measuring Success
+
+Track these metrics to quantify the impact of your refactoring efforts:
+
+**Code quality:**
+- Cyclomatic complexity (before vs. after)
+- Duplication percentage
+- Test coverage percentage
+- Linting warnings count
+
+**Team productivity:**
+- Time to understand a module (new developer onboarding)
+- Bug fix turnaround time
+- Feature development velocity in the refactored area
+
+**Reliability:**
+- Production incident rate
+- Mean time to recovery (MTTR)
+- Error rates in refactored areas
+
+## The Refactoring Mindset
+
+Refactoring is not a one-time project. It's an ongoing practice. Every sprint, every feature, every bug fix is an opportunity to leave the code a little better than you found it.
+
+AI makes this practice dramatically faster. Use it.

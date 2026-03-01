@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+
+# Build output
+dist/
+build/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated analysis (users will generate their own)
+refactor-notes/
+
+# Environment
+.env
+.env.local
