@@ -129,7 +129,7 @@ Trust but verify. Run the safety net, benchmark against baselines, and deploy wi
 ## Repository Structure
 
 ```
-refactor-pilot/
+refactor-pilot-framework/
 ├── README.md                          # You are here
 ├── LICENSE                            # MIT License
 ├── CONTRIBUTING.md                    # How to contribute
@@ -230,13 +230,13 @@ refactor-pilot/
 
 ```bash
 # Clone Refactor Pilot somewhere accessible
-git clone https://github.com/GuilhermeVozniak/refactor-pilot.git ~/refactor-pilot
+git clone https://github.com/GuilhermeVozniak/refactor-pilot-framework.git ~/refactor-pilot-framework
 
 # From your project directory, copy the skills into .claude/skills/
-cp -r ~/refactor-pilot/skills/ /path/to/your/project/.claude/skills/
+cp -r ~/refactor-pilot-framework/skills/ /path/to/your/project/.claude/skills/
 
 # Also copy the scripts (skills reference them)
-cp -r ~/refactor-pilot/scripts/ /path/to/your/project/.refactor-pilot/scripts/
+cp -r ~/refactor-pilot-framework/scripts/ /path/to/your/project/scripts/
 ```
 
 **Minimal approach — copy just the skills into your project:**

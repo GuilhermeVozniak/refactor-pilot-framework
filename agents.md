@@ -82,14 +82,14 @@ scripts, prompts, and docs.
 
 ```bash
 # 1. Clone Refactor Pilot
-git clone https://github.com/GuilhermeVozniak/refactor-pilot.git
+git clone https://github.com/GuilhermeVozniak/refactor-pilot-framework.git
 
 # 2. Copy skills into your project's .claude directory
 mkdir -p /path/to/your/project/.claude/skills
-cp -r refactor-pilot/skills/* /path/to/your/project/.claude/skills/
+cp -r refactor-pilot-framework/skills/* /path/to/your/project/.claude/skills/
 
 # 3. Copy scripts into your project (skills reference these)
-cp -r refactor-pilot/scripts/ /path/to/your/project/scripts/
+cp -r refactor-pilot-framework/scripts/ /path/to/your/project/scripts/
 
 # 4. Make scripts executable
 chmod +x /path/to/your/project/scripts/*.sh
@@ -133,7 +133,7 @@ If you just want the skills without the scripts:
 
 ```bash
 mkdir -p /path/to/your/project/.claude/skills
-cp -r refactor-pilot/skills/* /path/to/your/project/.claude/skills/
+cp -r refactor-pilot-framework/skills/* /path/to/your/project/.claude/skills/
 ```
 
 Note: Some skill steps reference automation scripts (`capture-baselines.sh`,
@@ -146,14 +146,14 @@ Add Refactor Pilot as a submodule for easy updates:
 
 ```bash
 cd /path/to/your/project
-git submodule add https://github.com/GuilhermeVozniak/refactor-pilot.git .refactor-pilot
+git submodule add https://github.com/GuilhermeVozniak/refactor-pilot-framework.git .refactor-pilot-framework
 
 # Symlink the skills into .claude
 mkdir -p .claude/skills
-ln -s ../../.refactor-pilot/skills/analyze-codebase .claude/skills/analyze-codebase
-ln -s ../../.refactor-pilot/skills/generate-tests .claude/skills/generate-tests
-ln -s ../../.refactor-pilot/skills/refactor-code .claude/skills/refactor-code
-ln -s ../../.refactor-pilot/skills/verify-changes .claude/skills/verify-changes
+ln -s ../../.refactor-pilot-framework/skills/analyze-codebase .claude/skills/analyze-codebase
+ln -s ../../.refactor-pilot-framework/skills/generate-tests .claude/skills/generate-tests
+ln -s ../../.refactor-pilot-framework/skills/refactor-code .claude/skills/refactor-code
+ln -s ../../.refactor-pilot-framework/skills/verify-changes .claude/skills/verify-changes
 ```
 
 ### Verifying the Installation
