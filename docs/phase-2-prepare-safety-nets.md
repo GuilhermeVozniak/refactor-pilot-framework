@@ -12,14 +12,31 @@ Refactoring without tests is a gamble. If you don't know what the code is suppos
 Phase 1 Outputs (codebase profile)
        │
        ▼
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│  Generate    │────▶│  Generate    │────▶│   Build      │
-│  Test Plan   │     │  Test Code   │     │  Refactor    │
-└──────────────┘     └──────────────┘     │  Plan        │
-                                          └──────────────┘
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   Define     │────▶│  Generate    │────▶│  Generate    │────▶│   Build      │
+│ Requirements │     │  Test Plan   │     │  Test Code   │     │  Refactor    │
+└──────────────┘     └──────────────┘     └──────────────┘     │  Plan        │
+                                                               └──────────────┘
 ```
 
-## Step 1: Generate a Test Plan
+## Step 1: Define Requirements
+
+Before generating tests or plans, make sure you have clear refactoring requirements.
+
+**Using the prompt:**
+Copy `prompts/00-define-requirements.md` and describe your project, what you want to improve, and your hard constraints. This produces a structured requirements document covering goals, success criteria, constraints, coding standards, scope, and risk tolerance.
+
+Save as `refactor-notes/00-requirements.md` and reference it in every subsequent step.
+
+**Capture baselines if you haven't already.** If you didn't capture baselines during Phase 1, do it now before making any changes:
+
+```bash
+./scripts/capture-baselines.sh /path/to/your/project
+```
+
+These baselines are critical for Phase 4 verification — you can't measure improvement if you don't know where you started.
+
+## Step 2: Generate a Test Plan
 
 Before writing any test code, produce a test plan that identifies what needs to be tested and why.
 
@@ -47,7 +64,7 @@ Component: UserProfileCard
 └── Handles null user object without crashing
 ```
 
-## Step 2: Generate Test Code
+## Step 3: Generate Test Code
 
 With the test plan as a guide, have AI generate the actual test files.
 
@@ -69,7 +86,21 @@ Copy `prompts/06-test-generation.md`, include the test plan and the source file 
 - Rust: built-in `#[cfg(test)]`
 - Java: JUnit, Mockito
 
-## Step 3: Build the Refactor Plan
+## Step 4: Refine Scope
+
+After generating the test plan and before building the refactor plan, refine the scope of your refactoring effort. The insights from Phase 1 and the test plan often reveal that the original scope was too broad or too narrow.
+
+**Questions to answer:**
+- Which areas have sufficient test coverage to refactor safely right now?
+- Which areas need tests written before they can be touched?
+- Are there quick wins (simple pattern conversions) that deliver value immediately?
+- Are there areas that should be deferred to a future refactoring cycle?
+
+**The scope refinement approach:** Start wide during Phase 1 analysis (understand everything), then narrow down to a focused, achievable set of changes for Phase 3. It's better to complete a smaller refactor well than to half-finish a large one.
+
+Update your requirements document (`refactor-notes/00-requirements.md`) with the refined scope.
+
+## Step 5: Build the Refactor Plan
 
 This is the blueprint for Phase 3. A well-constructed refactor plan tells AI (and your team) exactly what changes to make and in what order.
 
@@ -92,39 +123,6 @@ Copy `prompts/07-refactor-plan.md`, include the Phase 1 outputs and the source c
 7. **Risk areas** — Parts of the refactor that need extra attention
 
 **Review the plan before proceeding.** This is the last checkpoint before AI starts rewriting code. Make sure the plan matches your team's coding standards, architectural preferences, and priorities.
-
-## Step 0 (Pre-work): Define Requirements
-
-Before generating tests or plans, make sure you have clear refactoring requirements. If you skipped this step, use the requirements definition prompt now.
-
-**Using the prompt:**
-Copy `prompts/00-define-requirements.md` and describe your project, what you want to improve, and your hard constraints. This produces a structured requirements document covering goals, success criteria, constraints, coding standards, scope, and risk tolerance.
-
-Save as `refactor-notes/00-requirements.md` and reference it in every subsequent step.
-
-## Step 0.5: Capture Baselines
-
-If you haven't already captured baselines in Phase 1, do it now before making any changes.
-
-```bash
-./scripts/capture-baselines.sh /path/to/your/project
-```
-
-These baselines are critical for Phase 4 verification — you can't measure improvement if you don't know where you started.
-
-## Step 3.5: Refine Scope
-
-After generating the test plan and before building the refactor plan, refine the scope of your refactoring effort. The insights from Phase 1 and the test plan often reveal that the original scope was too broad or too narrow.
-
-**Questions to answer:**
-- Which areas have sufficient test coverage to refactor safely right now?
-- Which areas need tests written before they can be touched?
-- Are there quick wins (simple pattern conversions) that deliver value immediately?
-- Are there areas that should be deferred to a future refactoring cycle?
-
-**The scope refinement approach:** Start wide during Phase 1 analysis (understand everything), then narrow down to a focused, achievable set of changes for Phase 3. It's better to complete a smaller refactor well than to half-finish a large one.
-
-Update your requirements document (`refactor-notes/00-requirements.md`) with the refined scope.
 
 ## The TDD Virtuous Cycle with AI
 

@@ -142,7 +142,7 @@ go tool cover -func=coverage.out
 **Expected output:**
 A risk-ranked list of files/modules: well-tested areas (safe to refactor), undertested areas (need safety nets), and untested areas (high risk).
 
-## Step 6: Capture Performance Baselines
+## Step 6: Capture Baselines
 
 Before making any changes, capture quantitative measurements you can compare against after refactoring.
 

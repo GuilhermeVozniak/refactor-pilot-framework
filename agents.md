@@ -22,8 +22,8 @@ Performs Phase 1 analysis: extracts project metadata, maps file structure, runs 
 analysis with file-type-specific prompts, analyzes code coverage, captures performance
 baselines, and produces a comprehensive project summary.
 
-**Outputs:** `refactor-notes/01-metadata.md`, `02-file-structure.md`, `03-file-summaries.md`,
-`03b-coverage-analysis.md`, `baselines.md`, `04-project-summary.md`
+**Outputs:** `refactor-notes/01-metadata.md`, `refactor-notes/02-file-structure.md`, `refactor-notes/03-file-summaries.md`,
+`refactor-notes/03b-coverage-analysis.md`, `refactor-notes/baselines.md`, `refactor-notes/05-security-analysis.md`, `refactor-notes/04-project-summary.md`
 
 **References:** `references/file-type-prompts.md`, `references/anonymization.md`
 
@@ -36,8 +36,8 @@ baselines, and produces a comprehensive project summary.
 Performs Phase 2: defines requirements (if not done), generates a test plan, produces
 test code, verifies tests pass, refines scope, and builds a detailed refactor plan.
 
-**Outputs:** `refactor-notes/00-requirements.md`, `05-test-plan.md`, test files,
-`06-refactor-plan.md`
+**Outputs:** `refactor-notes/00-requirements.md`, `refactor-notes/05-test-plan.md`, test files,
+`refactor-notes/06-refactor-plan.md`
 
 **References:** `references/test-patterns.md`
 

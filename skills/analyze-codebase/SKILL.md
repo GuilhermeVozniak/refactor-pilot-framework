@@ -93,7 +93,21 @@ measurements (codebase size, build output, dependencies, code quality indicators
 
 Save as `refactor-notes/baselines.md`.
 
-### Step 5b: Security-Aware Analysis
+### Step 6: Check Build Configuration Flags
+
+Review build config files (`tsconfig.json`, `webpack.config.js`, `vite.config.ts`,
+`Cargo.toml`, `pyproject.toml`, or equivalent) for flags that affect refactoring:
+
+- TypeScript `strict` mode (enabling strictness can be a refactoring goal)
+- Module format (CommonJS vs. ESM affects import/export patterns)
+- Target version (constrains what syntax you can use)
+- Path aliases (affect how imports are restructured)
+- Tree shaking settings (affect dead code decisions)
+
+Use `references/file-type-prompts.md` (config section) for detailed analysis.
+Note findings in `refactor-notes/03-file-summaries.md` alongside the config file analysis.
+
+### Step 7: Security-Aware Analysis
 
 Scan the codebase for security concerns that should be addressed during refactoring:
 
@@ -108,12 +122,20 @@ Feed this into the refactor plan in Phase 2.
 
 Save as `refactor-notes/05-security-analysis.md`.
 
-### Step 6: Project Summary
+### Step 8: Generate Architecture Diagram
+
+Produce a text-based architecture diagram from the analysis outputs showing how major
+modules connect. Use arrows for data flow and dependency direction. Group files by
+feature area or layer.
+
+Include the diagram in the project summary.
+
+### Step 9: Project Summary
 
 Synthesize all outputs into a single document covering:
 
 - Executive overview
-- Architecture description (generate a text-based architecture diagram)
+- Architecture diagram (from Step 8)
 - Key data flows
 - Dependency health
 - Code quality assessment

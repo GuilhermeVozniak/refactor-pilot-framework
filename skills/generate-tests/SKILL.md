@@ -23,8 +23,8 @@ Does refactor-notes/ exist with Phase 1 outputs?
 └── YES → Continue
 
 Does refactor-notes/00-requirements.md exist?
-├── NO → Start with Step 0 (Define Requirements)
-└── YES → Skip to Step 1
+├── NO → Start with Step 1 (Define Requirements)
+└── YES → Skip to Step 2
 
 Does the project have existing tests?
 ├── YES → Run coverage analysis, focus on gaps
@@ -44,7 +44,7 @@ the `analyze-codebase` skill first.
 
 ## Workflow
 
-### Step 0: Define Requirements (if not done)
+### Step 1: Define Requirements (if not done)
 
 If `refactor-notes/00-requirements.md` doesn't exist, help the user define:
 - Refactoring goals and success criteria
@@ -54,7 +54,7 @@ If `refactor-notes/00-requirements.md` doesn't exist, help the user define:
 
 Save as `refactor-notes/00-requirements.md`.
 
-### Step 1: Generate Test Plan
+### Step 2: Generate Test Plan
 
 For the target module or file, produce a test plan covering:
 
@@ -68,7 +68,7 @@ Format as a nested list with priority levels (Critical / Important / Nice to hav
 
 Present the test plan to the user for review before generating code.
 
-### Step 2: Generate Test Code
+### Step 3: Generate Test Code
 
 After the user approves the plan, generate test files:
 
@@ -91,12 +91,12 @@ After the user approves the plan, generate test files:
 - Generate tests that won't pass against the current code
 - Use implementation-specific selectors (prefer role-based or text-based)
 
-### Step 3: Verify Tests Pass
+### Step 3b: Verify Tests Pass
 
 Run the generated tests against the current (un-refactored) code. Fix any failures.
 Tests MUST pass before proceeding.
 
-### Step 3.5: Refine Scope
+### Step 4: Refine Scope
 
 Based on test coverage results, refine the refactoring scope:
 - Which areas are now safe to refactor (good coverage)?
@@ -106,7 +106,7 @@ Based on test coverage results, refine the refactoring scope:
 
 Update `refactor-notes/00-requirements.md` with refined scope.
 
-### Step 4: Build Refactor Plan
+### Step 5: Build Refactor Plan
 
 Generate a detailed refactoring plan with:
 
