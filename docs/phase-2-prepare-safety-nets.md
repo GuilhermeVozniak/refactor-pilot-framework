@@ -126,6 +126,14 @@ After generating the test plan and before building the refactor plan, refine the
 
 Update your requirements document (`refactor-notes/00-requirements.md`) with the refined scope.
 
+## The TDD Virtuous Cycle with AI
+
+When you combine Test-Driven Development with AI assistance, something multiplicative happens. AI generates tests → those tests become a safety net → the safety net lets AI refactor confidently → refactored code is more modular and testable → AI generates even better tests for the new structure → the cycle continues.
+
+This is why TDD with AI pair programming produces dramatically more throughput than either TDD alone or AI alone. The tests remove fear of change, and AI removes the tedium of writing them. Projects that adopt this cycle from day one never accumulate the technical debt that forces painful rewrite projects later.
+
+The key insight: tests aren't a tax on development speed — they're the thing that *enables* speed. A codebase with strong test coverage and an AI assistant can absorb continuous refactoring without ever needing to slow down. A codebase without tests eventually grinds to a halt, regardless of how fast the AI can produce code.
+
 ## Tips for Phase 2
 
 **Don't skip test generation.** It's tempting to go straight to refactoring. Don't. Tests are your safety net. They're what let you move fast without breaking things.

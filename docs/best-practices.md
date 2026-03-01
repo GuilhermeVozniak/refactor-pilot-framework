@@ -8,6 +8,8 @@ AI can generate code faster than any human and has been exposed to more patterns
 
 Think of AI as a highly productive colleague who is new to your project. It will produce solid work quickly, but every output needs review from someone who knows the codebase, the users, and the constraints that don't exist in documentation.
 
+**Pair programming, not code generation.** The most effective dynamic is treating AI as a pair programming partner rather than a code generator you fire-and-forget. Interrupt it when it takes a wrong path. Provide context it lacks. Question its decisions. Say "stop, this is getting too complicated — simplify" when the solution grows beyond what's needed. This interactive back-and-forth produces significantly better results than dumping a prompt and accepting whatever comes back.
+
 ## The Context Window Is Everything
 
 The quality of AI's output is directly proportional to the quality of context you provide. This is why Phase 1 (Gather Insights) exists — every minute spent building context saves ten minutes of correcting bad output.
@@ -95,6 +97,8 @@ Big-bang refactors (rewriting an entire module at once) are high-risk. Increment
 - You can stop at any point and the code is still functional
 - Team members can review in parallel
 
+**Make refactoring continuous, not a scheduled event.** Teams that refactor continuously — a small extraction here, a DRY pass there, each protected by existing tests — never accumulate the kind of tech debt that requires a dedicated "refactoring sprint." With AI, these micro-refactors take minutes: extract a class, rename for clarity, consolidate duplicate methods. When you have a solid test suite, each change is safe and fast. The teams that need big-bang refactoring projects are the ones that skipped the small refactors along the way.
+
 ## Branch-Per-Solution Strategy
 
 When a refactoring task has multiple viable approaches, don't debate in a document — prototype each approach in its own branch and compare results.
@@ -180,6 +184,21 @@ Refactoring is one of the best opportunities to improve code security — you're
 
 **Don't try to fix everything at once.** Classify security issues by severity (critical, high, medium, low) and address critical and high issues in the current refactor cycle. Medium and low issues go into the backlog for future work.
 
+## From Prototype to Production
+
+AI makes it dangerously easy to build prototypes. In a few hours you can have a working demo that impresses stakeholders. But working demos and production software are very different things.
+
+**The gap:** In real-world projects, only about a third of commits are features. The rest is everything that makes software survive contact with real users — bug fixes, error handling, security hardening, deployment configuration, monitoring, documentation, and edge case coverage. AI-generated prototypes typically skip all of this.
+
+**How to cross the gap:** If you've used AI to build a prototype and now need to harden it for production, the Refactor Pilot framework is exactly the right tool. Treat the prototype as the "legacy code" in Phase 1, analyze it thoroughly, then use Phases 2-4 to add the safety nets, fix the shortcuts, and deploy properly. Specifically:
+
+1. **Phase 1:** Analyze the prototype for missing error handling, hardcoded values, security gaps, and untested paths
+2. **Phase 2:** Generate comprehensive tests for the existing behavior, then build a plan to harden the weak spots
+3. **Phase 3:** Refactor in passes — first add error handling and input validation, then extract and consolidate, then document
+4. **Phase 4:** Verify with the full checklist (tests, security scanning, performance baselines, deployment strategy)
+
+**The discipline difference:** Vibe coding without engineering discipline produces disposable prototypes. The same AI tools with TDD, CI, continuous refactoring, and small releases produce production-grade software. The variable isn't the AI — it's the process.
+
 ## When NOT to Use AI for Refactoring
 
 AI-assisted refactoring isn't always the right tool:
@@ -250,4 +269,6 @@ The most effective AI refactoring skills encode domain-specific knowledge. A gen
 
 Refactoring is not a one-time project. It's an ongoing practice. Every sprint, every feature, every bug fix is an opportunity to leave the code a little better than you found it.
 
-AI makes this practice dramatically faster. Use it.
+In well-run projects, the feature commits are the minority. The majority of the work — bug fixes, hardening, security, deployment, testing, documentation — is what separates a demo from software that real people depend on. AI accelerates all of it, not just the feature work.
+
+The variable was never the AI. It was always the process. TDD, small releases, continuous refactoring, and pair programming (now with an AI partner) are what turn AI speed into production quality. Without discipline, AI produces code that accumulates technical debt rapidly. With discipline, AI produces software that genuinely evolves week after week.

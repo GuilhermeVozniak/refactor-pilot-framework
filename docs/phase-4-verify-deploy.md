@@ -133,3 +133,13 @@ AI will produce a tailored checklist covering the specific risks of your refacto
 **Document what changed.** Write a brief summary of the refactoring for your team — what was changed, why, and how to roll back if needed. The refactor plan from Phase 2 is a good starting point.
 
 **Celebrate.** Seriously. Paying down technical debt is thankless work. Your codebase is now cleaner, more maintainable, and easier for the next developer to understand. That matters.
+
+## After Phase 4: The Evolution Cycle
+
+Software is never "done." After deploying refactored code, expect a steady stream of post-deploy work: edge cases that only surface under real traffic, new features that the improved architecture makes possible, and ongoing hardening based on production feedback.
+
+This is normal and healthy. The difference is that after completing the four phases, you're in a much stronger position to handle this evolution. You have tests, you have documentation, you have baselines, and you have a clean architecture. Each subsequent change is small, tested, and safe.
+
+**Treat post-deploy as continuous Phase 3+4.** Use the same discipline: small changes, tests first, commit after each step, verify before expanding. The four-phase framework isn't a one-time project — it's a flywheel. Once it's spinning, each iteration gets faster because the safety nets and context from previous cycles carry forward.
+
+**Track post-deploy commits.** In real projects, expect roughly 2-3x more commits after the initial refactoring "completes" as you discover edge cases, harden error handling, and make improvements that the cleaner architecture enables. This isn't a sign that the refactoring was incomplete — it's a sign that the refactoring unlocked the ability to improve safely and quickly.
