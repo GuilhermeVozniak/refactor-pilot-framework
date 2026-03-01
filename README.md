@@ -33,7 +33,21 @@ AI changes the economics of this problem. What used to require a senior develope
 
 ## Quick Start
 
-### Option 1: Use the Prompt Templates (Any AI Tool)
+### Option 1: Install via Claude Code Marketplace (Easiest)
+
+If you have [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed, you can add the Refactor Pilot marketplace and install the plugin directly from your terminal:
+
+```bash
+# Add the marketplace
+/plugin marketplace add GuilhermeVozniak/refactor-pilot-framework
+
+# Install the plugin
+/plugin install refactor-pilot@refactor-pilot-marketplace
+```
+
+That's it. All four skills (`analyze-codebase`, `generate-tests`, `refactor-code`, `verify-changes`) will be available in your Claude Code sessions. Updates are pulled automatically when the marketplace is refreshed.
+
+### Option 2: Use the Prompt Templates (Any AI Tool)
 
 1. Clone this repo
 2. Open the `prompts/` directory
@@ -42,7 +56,7 @@ AI changes the economics of this problem. What used to require a senior develope
 5. Work through the prompts sequentially (01 â†’ 09), feeding outputs from earlier steps as context for later ones
 6. Use the specialized `03a-03d` prompts for deeper analysis of specific file types
 
-### Option 2: Use the Scripts + Prompts
+### Option 3: Use the Scripts + Prompts
 
 1. Clone this repo
 2. Run the analysis scripts against your project:
@@ -54,7 +68,7 @@ AI changes the economics of this problem. What used to require a senior develope
    ```
 3. Feed the script outputs into the prompt templates for deeper analysis
 
-### Option 3: Install Claude Code Skills
+### Option 4: Install Claude Code Skills
 
 **Prerequisites:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) must be installed on your system.
 
@@ -111,20 +125,6 @@ Once installed, open Claude Code in your project and trigger skills naturally â€
 **Note:** The skills reference automation scripts (`scripts/`) and prompt templates (`prompts/`) from this repo. For the full experience, keep the cloned repo accessible or copy those directories into your project as well.
 
 See [agents.md](agents.md) for the full skill registry, details on each skill, and alternative installation methods.
-
-### Option 4: Install via Claude Code Marketplace (Easiest)
-
-If you have [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed, you can add the Refactor Pilot marketplace and install the plugin directly from your terminal:
-
-```bash
-# Add the marketplace
-/plugin marketplace add GuilhermeVozniak/refactor-pilot-framework
-
-# Install the plugin
-/plugin install refactor-pilot@refactor-pilot-marketplace
-```
-
-That's it. All four skills (`analyze-codebase`, `generate-tests`, `refactor-code`, `verify-changes`) will be available in your Claude Code sessions. Updates are pulled automatically when the marketplace is refreshed.
 
 ### Option 5: Use with Cursor, Windsurf, or Other AI Editors
 
