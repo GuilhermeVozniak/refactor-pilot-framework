@@ -17,12 +17,12 @@ if [[ -z "$PROJECT_PATH" ]]; then
   exit 1
 fi
 
-PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
-
 if [[ ! -d "$PROJECT_PATH" ]]; then
   echo "Error: Directory not found: $PROJECT_PATH" >&2
   exit 1
 fi
+
+PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
 
 # ---------------------------------------------------------------------------
 # Collect all files (excluding ignored directories)
@@ -30,12 +30,16 @@ fi
 
 IGNORE_PATTERN='node_modules|\.git/|dist/|build/|coverage/|\.next/|\.nuxt/|__pycache__|\.venv|venv/|\.tox|\.mypy_cache|\.pytest_cache|target/|vendor/|\.cache/|\.turbo|\.parcel-cache'
 
-all_files=$(find "$PROJECT_PATH" -type f \
-  | grep -vE "$IGNORE_PATTERN" \
+all_files=$(find "$PROJECT_PATH" -type f 2>/dev/null \
+  | grep -vE "$IGNORE_PATTERN" 2>/dev/null \
   | sed "s|^$PROJECT_PATH/||" \
-  | sort)
+  | sort) || true
 
-total_count=$(echo "$all_files" | grep -c . || echo "0")
+if [[ -z "$all_files" ]]; then
+  total_count=0
+else
+  total_count=$(echo "$all_files" | wc -l | tr -d ' ')
+fi
 
 echo "# File Structure Report"
 echo ""

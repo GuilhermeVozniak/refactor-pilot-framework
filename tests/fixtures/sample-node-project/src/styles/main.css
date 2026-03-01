@@ -1,0 +1,7 @@
+.user-card {
+  padding: 16px;
+  border: 1px solid #ccc;
+}
+.user-card h2 {
+  color: #333 !important;
+}

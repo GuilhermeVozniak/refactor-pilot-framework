@@ -20,12 +20,12 @@ if [[ -z "$PROJECT_PATH" ]]; then
   exit 1
 fi
 
-PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
-
 if [[ ! -d "$PROJECT_PATH" ]]; then
   echo "Error: Directory not found: $PROJECT_PATH" >&2
   exit 1
 fi
+
+PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
 
 echo "# Project Metadata Report"
 echo ""

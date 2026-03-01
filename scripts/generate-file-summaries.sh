@@ -30,12 +30,12 @@ if [[ -z "$PROJECT_PATH" ]]; then
   exit 1
 fi
 
-PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
-
 if [[ ! -d "$PROJECT_PATH" ]]; then
   echo "Error: Directory not found: $PROJECT_PATH" >&2
   exit 1
 fi
+
+PROJECT_PATH="$(cd "$PROJECT_PATH" && pwd)"
 
 MAX_FILE_SIZE=50000  # Skip files larger than 50KB
 
@@ -58,13 +58,17 @@ OUTPUT_DIR="$PROJECT_PATH/refactor-notes/file-analysis"
 mkdir -p "$OUTPUT_DIR"
 
 # Find source files (exclude test files)
-source_files=$(find "$PROJECT_PATH" -type f \
-  | grep -vE "$IGNORE_PATTERN" \
-  | grep -E "$ext_regex" \
-  | grep -vE '\.test\.|\.spec\.|__tests__/' \
-  | sort)
+source_files=$(find "$PROJECT_PATH" -type f 2>/dev/null \
+  | grep -vE "$IGNORE_PATTERN" 2>/dev/null \
+  | grep -E "$ext_regex" 2>/dev/null \
+  | grep -vE '\.test\.|\.spec\.|__tests__/' 2>/dev/null \
+  | sort) || true
 
-total=$(echo "$source_files" | grep -c . || echo "0")
+if [[ -z "$source_files" ]]; then
+  total=0
+else
+  total=$(echo "$source_files" | wc -l | tr -d ' ')
+fi
 echo "Found $total source files to analyze."
 echo ""
 
