@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.jpg" alt="Refactor Pilot Banner" width="100%" />
+</p>
+
 # Refactor Pilot
 
 **A systematic, AI-assisted framework for safely refactoring legacy codebases.**
@@ -10,9 +14,11 @@ Whether you use Claude, ChatGPT, Copilot, Cursor, or any other AI coding tool, t
 
 ## Why This Exists
 
-Every team has code like this: a proof-of-concept that became production, CSS files with 250+ `!important` declarations, global variables mutating state from three different modules, and comments that say `// TODO: fix this later` from 2019. Legacy code is the beach staircase that collapsed — and someone bolted wooden platforms over the gap so people could keep walking.
+Every codebase has that one corner nobody wants to touch. The authentication module that was "temporary" three years ago. The 2,000-line utility file where six different teams dumped helper functions. The styling layer where every other rule needs `!important` because the cascade became a war zone. Configuration files with flags nobody remembers setting, and entire directories that only one person (who left the company) understood.
 
-AI can now do the heavy lifting of refactoring that code. But "throw it at ChatGPT" is not a strategy. You need a **systematic process** that keeps your codebase safe while AI does the grunt work. That's what Refactor Pilot provides.
+Technical debt doesn't happen overnight — it accumulates one shortcut at a time until the cost of changing anything exceeds the cost of just building around it. And now you've got a codebase that works, but nobody can confidently modify it without breaking something unexpected.
+
+AI changes the economics of this problem. What used to require a senior developer spending days carefully tracing dependencies and hand-rewriting modules can now be done in a fraction of the time — but only if you approach it methodically. Pasting your whole codebase into a chat window and asking "fix this" is not a strategy. You need structure: understand first, protect behavior with tests, transform with a plan, then verify everything. That's the process Refactor Pilot gives you.
 
 ### What You Get
 
@@ -305,7 +311,7 @@ AI-assisted refactoring is powerful, but it requires discipline. Here are the gu
 
 **Use feature flags.** Deploy refactored code behind feature flags so you can roll back instantly if something breaks in production.
 
-**Treat AI as a junior developer.** It's fast and tireless, but it needs code review. The quality of its output depends heavily on the quality of your prompts and context.
+**You review, AI authors.** It's fast and tireless, but it needs oversight like any new team member on your project. The quality of its output depends heavily on the quality of your prompts and context.
 
 [Read the full best practices guide →](docs/best-practices.md)
 

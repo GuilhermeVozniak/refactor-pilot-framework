@@ -4,7 +4,7 @@ This is where AI rewrites the code. With insights gathered, tests in place, and 
 
 ## Why This Phase Matters
 
-This is the phase that delivers the 90% time savings. What used to take a senior developer a full day of careful, manual refactoring can be completed in roughly 30 minutes with AI assistance — and the result is often cleaner because AI doesn't get fatigued or cut corners when it's 4pm on a Friday.
+This is the phase that delivers the biggest time savings. Tasks that would normally take a developer hours of careful, repetitive editing — renaming patterns across dozens of files, converting syntax, extracting shared logic — can be completed in minutes with AI assistance. And unlike a human on hour six of a refactoring marathon, AI applies the same level of attention to the last file as it does to the first.
 
 ## The Workflow
 

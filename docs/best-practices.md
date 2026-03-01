@@ -2,11 +2,11 @@
 
 This guide covers the principles and guardrails that make AI-assisted refactoring safe, effective, and repeatable.
 
-## Treat AI as a Junior Developer
+## You Are the Reviewer, AI Is the Author
 
-AI is fast, tireless, and has read more code than any human ever will. But it lacks judgment. It doesn't understand your business context, your team's conventions, or the political reasons why that one function is structured the way it is.
+AI can generate code faster than any human and has been exposed to more patterns than any single developer will encounter in a career. But it has no understanding of your business logic, your team's unwritten conventions, or why that one function has a seemingly redundant null check that actually prevents a race condition in production.
 
-Your role is senior developer and code reviewer. AI writes the code. You decide if it's correct.
+Think of AI as a highly productive colleague who is new to your project. It will produce solid work quickly, but every output needs review from someone who knows the codebase, the users, and the constraints that don't exist in documentation.
 
 ## The Context Window Is Everything
 
@@ -51,7 +51,7 @@ Don't start with your most critical production service. Begin with:
 
 ## Inspect Every Diff
 
-Before committing AI-generated code, review it as carefully as you would a junior developer's pull request.
+Before committing AI-generated code, review it with the same rigor you'd apply to any pull request from a new team member.
 
 **Things to watch for:**
 - New dependencies added without discussion
