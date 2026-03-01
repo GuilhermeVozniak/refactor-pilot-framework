@@ -140,7 +140,38 @@ Note: Some skill steps reference automation scripts (`capture-baselines.sh`,
 `analyze-project.sh`, etc.). Without these scripts, you can still use the skills —
 just skip the script-dependent steps and use the prompt templates manually instead.
 
-### Method 3: Git Submodule
+### Method 3: Claude Code Marketplace (Easiest)
+
+Install directly from the marketplace without cloning anything:
+
+```bash
+# Add the Refactor Pilot marketplace
+/plugin marketplace add GuilhermeVozniak/refactor-pilot-framework
+
+# Install the plugin
+/plugin install refactor-pilot@refactor-pilot-marketplace
+```
+
+To update later:
+
+```bash
+/plugin marketplace update refactor-pilot-marketplace
+```
+
+To manage the plugin:
+
+```bash
+# Temporarily disable
+/plugin disable refactor-pilot@refactor-pilot-marketplace
+
+# Re-enable
+/plugin enable refactor-pilot@refactor-pilot-marketplace
+
+# Uninstall
+/plugin uninstall refactor-pilot@refactor-pilot-marketplace
+```
+
+### Method 4: Git Submodule
 
 Add Refactor Pilot as a submodule for easy updates:
 

@@ -1,0 +1,17 @@
+{
+  "name": "refactor-pilot-marketplace",
+  "description": "Refactor Pilot — AI-assisted code refactoring skills for Claude Code",
+  "owner": {
+    "name": "Guilherme Vozniak de Almeida",
+    "email": "gui336699@gmail.com",
+    "github": "GuilhermeVozniak"
+  },
+  "plugins": [
+    {
+      "name": "refactor-pilot",
+      "source": ".",
+      "description": "Four-phase AI refactoring framework: analyze, test, transform, verify",
+      "version": "1.0.0"
+    }
+  ]
+}

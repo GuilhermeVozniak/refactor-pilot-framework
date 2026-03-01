@@ -1,0 +1,20 @@
+{
+  "name": "refactor-pilot",
+  "description": "A systematic, AI-assisted framework for safely refactoring legacy codebases. Includes four skills: analyze-codebase, generate-tests, refactor-code, and verify-changes — covering the full refactoring lifecycle from analysis to deployment.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Guilherme Vozniak de Almeida",
+    "github": "GuilhermeVozniak"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/GuilhermeVozniak/refactor-pilot-framework",
+  "keywords": [
+    "refactoring",
+    "code-quality",
+    "ai-assisted",
+    "legacy-code",
+    "testing",
+    "claude-code",
+    "skills"
+  ]
+}
