@@ -45,7 +45,7 @@ Pull out the foundational information about the project — what it depends on, 
 
 **Using the script:**
 ```bash
-node scripts/analyze-project.js /path/to/your/project
+./scripts/analyze-project.sh /path/to/your/project
 ```
 
 **Using the prompt manually:**
@@ -70,7 +70,7 @@ Build a manifest of every file in the project, categorized by type and purpose.
 
 **Using the script:**
 ```bash
-node scripts/map-file-structure.js /path/to/your/project
+./scripts/map-file-structure.sh /path/to/your/project
 ```
 
 **Using the prompt manually:**
@@ -93,7 +93,7 @@ For each file (or each file in the target area), generate a concise summary of w
 
 **Using the script:**
 ```bash
-node scripts/generate-file-summaries.js /path/to/your/project
+./scripts/generate-file-summaries.sh /path/to/your/project
 ```
 
 **Using the prompt manually:**

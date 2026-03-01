@@ -18,7 +18,7 @@ AI can now do the heavy lifting of refactoring that code. But "throw it at ChatG
 
 - A **four-phase methodology** that mirrors how senior engineers refactor, augmented with AI at every step
 - **Ready-to-use prompt templates** for codebase analysis, test generation, refactor planning, and code transformation
-- **Automation scripts** (Node.js) for extracting project metadata, mapping file structures, and analyzing code
+- **Automation scripts** (Bash) for extracting project metadata, mapping file structures, and analyzing code — zero dependencies, runs on any Unix system
 - **Claude Code skills** you can install for a fully integrated refactoring workflow
 - **Checklists and guardrails** to keep AI-assisted refactoring safe and reviewable
 
@@ -126,10 +126,10 @@ refactor-pilot/
 │   ├── 08-code-transform.md
 │   └── 09-verify-checklist.md
 │
-├── scripts/                           # Automation scripts (Node.js)
-│   ├── analyze-project.js
-│   ├── map-file-structure.js
-│   └── generate-file-summaries.js
+├── scripts/                           # Automation scripts (Bash)
+│   ├── analyze-project.sh
+│   ├── map-file-structure.sh
+│   └── generate-file-summaries.sh
 │
 ├── skills/                            # Claude Code skills
 │   ├── analyze-codebase/
@@ -163,9 +163,9 @@ refactor-pilot/
 1. Clone this repo
 2. Run the analysis scripts against your project:
    ```bash
-   node scripts/analyze-project.js /path/to/your/project
-   node scripts/map-file-structure.js /path/to/your/project
-   node scripts/generate-file-summaries.js /path/to/your/project
+   ./scripts/analyze-project.sh /path/to/your/project
+   ./scripts/map-file-structure.sh /path/to/your/project
+   ./scripts/generate-file-summaries.sh /path/to/your/project
    ```
 3. Feed the script outputs into the prompt templates for deeper analysis
 
