@@ -161,6 +161,40 @@ Track these metrics to quantify the impact of your refactoring efforts:
 - Mean time to recovery (MTTR)
 - Error rates in refactored areas
 
+## Code Anonymization for Sensitive Codebases
+
+When working with proprietary or regulated code, you don't have to choose between AI assistance and security. Use these techniques to get AI help without exposing sensitive code.
+
+**Technique 1: Send Structure, Not Code.** Describe what your code does in plain language rather than pasting the source. AI can generate refactoring plans, test strategies, and architecture recommendations from descriptions alone.
+
+**Technique 2: Find-and-Replace Sanitization.** Before sending code to AI, replace proprietary names with generic equivalents — `CompanyAuth` becomes `AuthService`, `SpecialAlgorithm` becomes `processData`. Keep a mapping file locally to reverse the substitution.
+
+**Technique 3: Use Analysis Outputs.** Run Phase 1 analysis locally (with local models or scripts), then send only the generated summaries and metadata to cloud AI for planning. The summaries contain structure and patterns without revealing implementation details.
+
+**Hybrid Local + Cloud Approach.** Use local models (Ollama with Qwen, DeepSeek, or CodeLlama) for code-touching tasks (analysis, transformation) and cloud models for planning tasks that work from summaries. See [Anonymization Guide](anonymization-guide.md) for the complete playbook.
+
+## Model Selection and Cost Optimization
+
+Not every task needs the most powerful (and expensive) model. Match model capability to task complexity.
+
+**Planning tasks** (requirements, refactor plans, architecture decisions) benefit from the strongest models available — Claude Opus, GPT-4, or equivalent. These tasks are high-leverage: a good plan saves hours of rework. The cost of one premium API call is trivial compared to the time saved.
+
+**Execution tasks** (generating test code, applying straightforward pattern conversions, formatting) can use faster and cheaper models — Claude Haiku, GPT-4o-mini, or local models. These are repetitive tasks with clear instructions where speed and cost matter more than nuance.
+
+**Analysis tasks** fall in between. File-by-file analysis can use mid-tier models, but the final project summary synthesis benefits from a stronger model.
+
+See [Model Selection Strategy](model-selection-strategy.md) for token estimates per task and specific model recommendations.
+
+## Creating Domain-Expert Skills
+
+The most effective AI refactoring skills encode domain-specific knowledge. A generic "refactor this React code" prompt produces decent results, but a skill that knows your team's conventions, preferred patterns, and common pitfalls produces great results.
+
+**Who should create skills?** The senior engineers and domain experts on your team. They know the patterns that work, the mistakes that keep happening, and the standards that matter. A skill captures that knowledge in a reusable format.
+
+**Quick decision trees** at the top of a skill help AI make the right choices fast — "If the component uses class state, convert to useState. If it uses lifecycle methods, convert to useEffect. If it manages form state, consider useReducer."
+
+**Progressive disclosure** keeps skills readable. Put the core workflow (under 200 lines) in `SKILL.md` and supporting detail in a `references/` folder. See [Creating Domain Skills](creating-domain-skills.md) for the full guide.
+
 ## The Refactoring Mindset
 
 Refactoring is not a one-time project. It's an ongoing practice. Every sprint, every feature, every bug fix is an opportunity to leave the code a little better than you found it.

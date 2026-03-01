@@ -93,6 +93,39 @@ Copy `prompts/07-refactor-plan.md`, include the Phase 1 outputs and the source c
 
 **Review the plan before proceeding.** This is the last checkpoint before AI starts rewriting code. Make sure the plan matches your team's coding standards, architectural preferences, and priorities.
 
+## Step 0 (Pre-work): Define Requirements
+
+Before generating tests or plans, make sure you have clear refactoring requirements. If you skipped this step, use the requirements definition prompt now.
+
+**Using the prompt:**
+Copy `prompts/00-define-requirements.md` and describe your project, what you want to improve, and your hard constraints. This produces a structured requirements document covering goals, success criteria, constraints, coding standards, scope, and risk tolerance.
+
+Save as `refactor-notes/00-requirements.md` and reference it in every subsequent step.
+
+## Step 0.5: Capture Baselines
+
+If you haven't already captured baselines in Phase 1, do it now before making any changes.
+
+```bash
+./scripts/capture-baselines.sh /path/to/your/project
+```
+
+These baselines are critical for Phase 4 verification — you can't measure improvement if you don't know where you started.
+
+## Step 3.5: Refine Scope
+
+After generating the test plan and before building the refactor plan, refine the scope of your refactoring effort. The insights from Phase 1 and the test plan often reveal that the original scope was too broad or too narrow.
+
+**Questions to answer:**
+- Which areas have sufficient test coverage to refactor safely right now?
+- Which areas need tests written before they can be touched?
+- Are there quick wins (simple pattern conversions) that deliver value immediately?
+- Are there areas that should be deferred to a future refactoring cycle?
+
+**The scope refinement approach:** Start wide during Phase 1 analysis (understand everything), then narrow down to a focused, achievable set of changes for Phase 3. It's better to complete a smaller refactor well than to half-finish a large one.
+
+Update your requirements document (`refactor-notes/00-requirements.md`) with the refined scope.
+
 ## Tips for Phase 2
 
 **Don't skip test generation.** It's tempting to go straight to refactoring. Don't. Tests are your safety net. They're what let you move fast without breaking things.
@@ -104,3 +137,5 @@ Copy `prompts/07-refactor-plan.md`, include the Phase 1 outputs and the source c
 **Get team buy-in on the plan.** If you're working on a team, share the refactor plan before executing it. This is a great use of a pull request with just the plan document.
 
 **Save the test plan and refactor plan.** These documents are valuable artifacts. They explain the "why" behind changes and help future developers understand the refactoring decisions.
+
+**Use expensive models for planning, cheap models for execution.** The refactor plan is the most important artifact — invest in quality by using a powerful model (Claude Opus, GPT-4) for plan generation. Execution tasks like test code generation can use faster, cheaper models. See [Model Selection Strategy](model-selection-strategy.md).

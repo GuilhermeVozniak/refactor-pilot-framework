@@ -15,6 +15,24 @@ description: >
 You are performing Phase 1 (Gather Insights) of the Refactor Pilot framework. Your job is
 to build a comprehensive understanding of the codebase before any changes are made.
 
+## Quick Decision Tree
+
+```
+Is this a new project you haven't analyzed?
+├── YES → Start at Step 1
+└── NO → Has the code changed since last analysis?
+    ├── YES → Re-run steps 3-4 on changed files
+    └── NO → Skip to Phase 2 (generate-tests)
+
+Is the codebase sensitive or proprietary?
+├── YES → Use local models for code analysis, see references/anonymization.md
+└── NO → Proceed normally
+
+Is the codebase large (>500 files)?
+├── YES → Scope to one module/feature area first
+└── NO → Analyze the whole project
+```
+
 ## Workflow
 
 Execute these steps in order. Save all outputs to a `refactor-notes/` directory in the
@@ -38,16 +56,8 @@ Save as `refactor-notes/01-metadata.md`.
 Generate a categorized file manifest by running a directory listing (excluding
 `node_modules`, `.git`, `dist`, `build`, `__pycache__`, `.venv`, and similar).
 
-Categorize every file into:
-- Components / Views / Pages
-- Utilities / Helpers
-- Services / API clients
-- State management
-- Types / Interfaces
-- Styles
-- Tests
-- Configuration
-- Data / Constants
+Categorize every file into: Components/Views/Pages, Utilities/Helpers, Services/API clients,
+State management, Types/Interfaces, Styles, Tests, Configuration, Data/Constants.
 
 Flag orphaned files, naming inconsistencies, and structural concerns.
 
@@ -56,24 +66,39 @@ Save as `refactor-notes/02-file-structure.md`.
 ### Step 3: Per-File Analysis
 
 For each file in the target area (or the most important 10-20 files if the project is
-large), produce a summary covering:
+large), produce a summary. Use file-type-specific analysis:
 
-- Purpose (one sentence)
-- Exports
-- Imports and dependencies
-- Complexity indicators
-- Code smells
-- Data flow
-- Refactoring opportunities
+- **UI Components** → Focus on props, state, rendering logic, side effects
+- **Config files** → Focus on build flags, constraints, refactoring implications
+- **Utilities** → Focus on function signatures, purity, performance, type safety
+- **Stylesheets** → Focus on selectors, specificity, !important usage, layout patterns
+
+See `references/file-type-prompts.md` for detailed analysis templates per file type.
 
 Process files in batches. Save as `refactor-notes/03-file-summaries.md`.
 
-### Step 4: Project Summary
+### Step 4: Analyze Code Coverage (if tests exist)
+
+Run a coverage report and assess refactoring risk by coverage level:
+- **>80% coverage** → LOW RISK, safe to refactor
+- **50-80% coverage** → MEDIUM RISK, some test generation needed
+- **<50% coverage** → HIGH RISK, extensive test generation needed first
+
+Save as `refactor-notes/03b-coverage-analysis.md`.
+
+### Step 5: Capture Baselines
+
+Run `./scripts/capture-baselines.sh` against the project to capture quantitative
+measurements (codebase size, build output, dependencies, code quality indicators).
+
+Save as `refactor-notes/baselines.md`.
+
+### Step 6: Project Summary
 
 Synthesize all outputs into a single document covering:
 
 - Executive overview
-- Architecture description
+- Architecture description (generate a text-based architecture diagram)
 - Key data flows
 - Dependency health
 - Code quality assessment
@@ -92,6 +117,6 @@ After completing all steps, present the user with:
 ## Important Notes
 
 - For large codebases, focus on one module or feature area at a time.
-- For sensitive code, note that analysis can be done with local models.
+- For sensitive code, see `references/anonymization.md` for local model strategies.
 - Save all outputs — they are required context for subsequent phases.
 - Be honest about areas of uncertainty. If a file's purpose is unclear, say so.

@@ -16,6 +16,29 @@ description: >
 You are performing Phase 3 (Transform) of the Refactor Pilot framework. Your job is to
 rewrite code according to a refactoring plan while preserving existing behavior.
 
+## Quick Decision Tree
+
+```
+Does a refactor plan exist (refactor-notes/06-refactor-plan.md)?
+├── NO → Ask: proceed without a plan (riskier) or run generate-tests first?
+└── YES → Follow the plan
+
+Do safety net tests exist?
+├── NO → STRONGLY recommend running generate-tests first
+└── YES → Run tests before starting, confirm they pass
+
+How many files are in scope?
+├── 1-10 files → Approach A: One file at a time
+├── 10-50 files → Approach B: Feature-level transform
+└── 50+ files → Approach C: Iterative refinement passes
+
+What type of refactoring?
+├── Extract shared logic → Start with Pass 1
+├── Modernize patterns → Start with Pass 2
+├── Reorganize structure → Start with Pass 3
+└── Full refactor → Execute all three passes in order
+```
+
 ## Prerequisites
 
 - Phase 1 analysis should exist (`refactor-notes/04-project-summary.md`)
@@ -43,17 +66,8 @@ For each extraction:
 
 ### Pass 2: Convert Patterns
 
-Apply modern pattern conversions as specified in the refactor plan:
-
-Common conversions:
-- Class components → Functional components with hooks
-- Lifecycle methods → useEffect, useMemo, useCallback
-- Callbacks/promises → async/await
-- var → const/let
-- Global state mutation → Modern state management
-- !important CSS → Scoped styles
-- CommonJS require → ESM import
-- Mutable patterns → Immutable patterns
+Apply modern pattern conversions as specified in the refactor plan.
+See `references/pattern-conversions.md` for conversion guides.
 
 For each conversion:
 - Preserve ALL existing behavior
@@ -73,6 +87,15 @@ For each conversion:
 - Apply consistent formatting
 
 **Verification:** Run tests after restructuring. All must pass.
+
+### Post-Pass: Explain Your Decisions
+
+After each pass, explain:
+1. Every structural decision you made and why
+2. Any places where you changed behavior (even subtly) and the reasoning
+3. Alternative approaches you considered and why you chose this one
+4. Assumptions you made about the codebase or requirements
+5. Areas where you are least confident about the change
 
 ## Output
 

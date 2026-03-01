@@ -15,6 +15,25 @@ description: >
 You are performing Phase 4 (Verify & Deploy) of the Refactor Pilot framework. Your job is
 to ensure that refactored code is correct, performant, and safe to deploy.
 
+## Quick Decision Tree
+
+```
+Do baselines exist (refactor-notes/baselines.md)?
+├── NO → Run capture-baselines.sh first for comparison data
+└── YES → Compare against baselines
+
+Are all tests passing?
+├── NO → Identify: is the test wrong or the code wrong?
+│   ├── Test was testing implementation details → Update test
+│   └── Code has a regression → Fix the code
+└── YES → Continue to benchmarking
+
+Is the refactored code deployed behind a feature flag?
+├── YES → Recommend canary deployment with monitoring
+└── NO → Recommend adding feature flag for gradual rollout
+    └── Low-risk change? → Standard deployment may be fine
+```
+
 ## Workflow
 
 ### Step 1: Run Full Test Suite
@@ -37,14 +56,16 @@ If any tests fail:
 
 ### Step 2: Benchmark Comparison
 
-Compare refactored code against the original on key metrics:
+Compare refactored code against baselines from `refactor-notes/baselines.md`:
 
 | Metric | Before | After | Difference | Status |
 |--------|--------|-------|------------|--------|
 | Bundle size | | | | |
 | Build time | | | | |
 | Test suite time | | | | |
-| Key function perf | | | | |
+| Line count | | | | |
+| TODO/FIXME count | | | | |
+| TypeScript `any` count | | | | |
 
 Flag any metric that regressed by more than 10%.
 
@@ -70,11 +91,13 @@ Based on the verification results, recommend a deployment strategy:
 - **Cautious** — Minor concerns, recommend feature flag or canary deployment
 - **Hold** — Issues found, needs fixes before deployment
 
+See `references/deployment-strategies.md` for detailed deployment playbooks.
+
 ## Output
 
 Present a verification report with:
 1. Test results summary
-2. Performance comparison table
+2. Performance comparison table (against baselines)
 3. Verification checklist with status
 4. Deployment recommendation
 5. Any remaining action items

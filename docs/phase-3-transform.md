@@ -132,3 +132,36 @@ Each pass is smaller and easier to review.
 **Don't refactor tests in the same step.** Keep the original tests running against refactored code first. Once everything passes, you can clean up the test code in a separate step.
 
 **Use AI to explain its changes.** If a refactored section looks different from what you expected, ask AI to explain its reasoning. Sometimes it found a better approach; sometimes it misunderstood the requirement.
+
+## The "Explain Your Decisions" Pattern
+
+When reviewing AI-generated refactored code, ask AI to explain every significant decision it made. This surfaces misunderstandings early and creates documentation for future developers.
+
+**After each transformation pass, prompt:**
+```
+For the refactored code you just produced, explain:
+
+1. Every structural decision you made and why
+2. Any places where you changed behavior (even subtly) and the reasoning
+3. Any alternative approaches you considered and why you chose this one
+4. Any assumptions you made about the codebase or requirements
+5. Areas where you are least confident about the change
+```
+
+**Why this matters:**
+
+AI models are good at generating plausible code but may not always understand the deeper context. By asking them to explain their reasoning, you catch cases where the model:
+
+- Misinterpreted a business rule as a bug and "fixed" it
+- Made assumptions about concurrent access, caching, or state management
+- Chose a pattern that conflicts with your team's conventions
+- Over-simplified error handling that was complex for a reason
+
+Save the explanations alongside your refactoring notes. They become valuable documentation for code reviewers and future maintainers.
+
+**Example workflow:**
+1. AI produces refactored `UserProfile.tsx`
+2. You review and spot a change in how null users are handled
+3. You ask AI to explain
+4. AI reveals it assumed null users were an error case, but in your app they represent anonymous sessions
+5. You catch the bug before it reaches production

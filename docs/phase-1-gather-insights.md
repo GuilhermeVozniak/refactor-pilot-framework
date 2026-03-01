@@ -116,6 +116,74 @@ Feed all the outputs from steps 1-3 into the project summary prompt. This produc
 **Using the prompt:**
 Copy `prompts/04-project-summary.md` and include the outputs from the previous three steps as context.
 
+## Step 5: Analyze Code Coverage
+
+If your project has existing tests, run a coverage report and feed it into the coverage analysis prompt to identify areas that are safe to refactor versus areas that need safety net tests first.
+
+**Using the prompt:**
+Copy `prompts/01b-coverage-analysis.md`, paste your coverage report output, and let AI assess refactoring risk by coverage level.
+
+**How to generate coverage reports:**
+```bash
+# JavaScript/TypeScript (Jest)
+npx jest --coverage --coverageReporters=text
+
+# JavaScript/TypeScript (Vitest)
+npx vitest --coverage
+
+# Python
+pytest --cov=src --cov-report=term-missing
+
+# Go
+go test -coverprofile=coverage.out ./...
+go tool cover -func=coverage.out
+```
+
+**Expected output:**
+A risk-ranked list of files/modules: well-tested areas (safe to refactor), undertested areas (need safety nets), and untested areas (high risk).
+
+## Step 6: Capture Performance Baselines
+
+Before making any changes, capture quantitative measurements you can compare against after refactoring.
+
+**Using the script:**
+```bash
+./scripts/capture-baselines.sh /path/to/your/project
+```
+
+This captures codebase size, build output, dependency counts, test file counts, TODO/FIXME comments, `!important` counts, console.* statements, and TypeScript `any` usage. Output goes to `refactor-notes/baselines.md`.
+
+**Additional baselines to capture manually:**
+- Build time: `time npm run build`
+- Test duration: `time npm test`
+- Bundle analysis: `npx webpack-bundle-analyzer` or `npx vite-bundle-visualizer`
+- Lighthouse score for web projects
+
+## Step 7: Check Build Configuration Flags
+
+Build configuration often contains flags and settings that directly affect what refactoring is possible. Review your build config for:
+
+- **TypeScript `strict` mode** — If `strict: false`, enabling strictness incrementally can be a refactoring goal
+- **Module format** — CommonJS vs. ESM affects import/export patterns
+- **Target** — ES version targets constrain what syntax you can use
+- **Path aliases** — Affect how imports are restructured
+- **Tree shaking** — Whether unused exports are eliminated affects dead code decisions
+
+Use the config file analysis prompt (`prompts/03b-file-summary-config.md`) on your `tsconfig.json`, `webpack.config.js`, `vite.config.ts`, or equivalent.
+
+## Step 8: Generate Architecture Diagram
+
+Ask AI to produce a text-based architecture diagram from the Phase 1 outputs. This gives the team a shared visual of how modules connect.
+
+**Prompt:**
+```
+Based on the file structure and per-file analysis, produce a text-based architecture
+diagram showing how the major modules connect. Use arrows to indicate data flow
+and dependency direction. Group files by feature area or layer.
+```
+
+This is especially valuable when onboarding new developers or getting team buy-in for the refactor plan.
+
 ## Tips for Phase 1
 
 **Scope your analysis.** For large codebases, don't try to analyze everything at once. Pick a module, feature, or directory and start there.
@@ -124,4 +192,6 @@ Copy `prompts/04-project-summary.md` and include the outputs from the previous t
 
 **Iterate.** If the AI's analysis seems off, provide more context — adjacent files, README sections, or your own knowledge of the system. AI gets better with more context.
 
-**Use local models for sensitive code.** If your codebase contains trade secrets or proprietary logic, run the analysis with a local model (Ollama, LM Studio) rather than sending code to external APIs.
+**Use local models for sensitive code.** If your codebase contains trade secrets or proprietary logic, run the analysis with a local model (Ollama, LM Studio) rather than sending code to external APIs. See [Anonymization Guide](anonymization-guide.md) for detailed strategies.
+
+**Use file-type-specific prompts for deeper analysis.** The generic file summary prompt (`03-file-summary.md`) works well, but for more targeted insights, use the specialized variants: `03a` for UI components, `03b` for config files, `03c` for utilities, and `03d` for stylesheets.
