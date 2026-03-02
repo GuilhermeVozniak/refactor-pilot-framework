@@ -12,7 +12,7 @@ description: >
 
 # Generate Tests Skill
 
-You are performing Phase 2 (Prepare & Create Safety Nets) of the Refactor Pilot framework.
+You are performing Phase 2 (Prepare & Create Safety Nets) of the Refactor Pilot Framework.
 Your job is to generate tests that lock down current behavior and build a refactoring plan.
 
 ## Quick Decision Tree

@@ -1,6 +1,6 @@
-# Refactor Pilot — Skill Registry
+# Refactor Pilot Framework — Skill Registry
 
-This document lists all available skills (agents) in the Refactor Pilot framework.
+This document lists all available skills (agents) in the Refactor Pilot Framework.
 Skills are designed for Claude Code but the underlying methodology works with any AI tool.
 
 ## Skills Overview
@@ -81,7 +81,7 @@ Clone the repo and copy everything into your project. This gives skills access t
 scripts, prompts, and docs.
 
 ```bash
-# 1. Clone Refactor Pilot
+# 1. Clone Refactor Pilot Framework
 git clone https://github.com/GuilhermeVozniak/refactor-pilot-framework.git
 
 # 2. Copy skills into your project's .claude directory
@@ -145,7 +145,7 @@ just skip the script-dependent steps and use the prompt templates manually inste
 Install directly from the marketplace without cloning anything:
 
 ```bash
-# Add the Refactor Pilot marketplace
+# Add the Refactor Pilot Framework marketplace
 /plugin marketplace add GuilhermeVozniak/refactor-pilot-framework
 
 # Install the plugin
@@ -173,7 +173,7 @@ To manage the plugin:
 
 ### Method 4: Git Submodule
 
-Add Refactor Pilot as a submodule for easy updates:
+Add Refactor Pilot Framework as a submodule for easy updates:
 
 ```bash
 cd /path/to/your/project

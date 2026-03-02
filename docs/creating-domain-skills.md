@@ -1,6 +1,6 @@
 # Creating Domain-Specific Skills
 
-The skills included in Refactor Pilot are general-purpose. For best results, create domain-specific skills that encode your team's expertise, coding standards, and technology stack preferences.
+The skills included in Refactor Pilot Framework are general-purpose. For best results, create domain-specific skills that encode your team's expertise, coding standards, and technology stack preferences.
 
 ## Why Domain-Specific Skills Matter
 

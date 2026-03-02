@@ -1,4 +1,4 @@
-# Contributing to Refactor Pilot
+# Contributing to Refactor Pilot Framework
 
 Thanks for considering a contribution. This project benefits from community input — whether it's improving prompts, adding scripts for new languages, sharing examples, or fixing typos.
 

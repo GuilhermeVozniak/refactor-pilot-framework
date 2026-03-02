@@ -12,7 +12,7 @@ description: >
 
 # Analyze Codebase Skill
 
-You are performing Phase 1 (Gather Insights) of the Refactor Pilot framework. Your job is
+You are performing Phase 1 (Gather Insights) of the Refactor Pilot Framework. Your job is
 to build a comprehensive understanding of the codebase before any changes are made.
 
 ## Quick Decision Tree

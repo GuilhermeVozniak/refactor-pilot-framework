@@ -13,7 +13,7 @@ description: >
 
 # Refactor Code Skill
 
-You are performing Phase 3 (Transform) of the Refactor Pilot framework. Your job is to
+You are performing Phase 3 (Transform) of the Refactor Pilot Framework. Your job is to
 rewrite code according to a refactoring plan while preserving existing behavior.
 
 ## Quick Decision Tree

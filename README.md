@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/banner.jpg" alt="Refactor Pilot Banner" width="100%" />
+  <img src="assets/banner.jpg" alt="Refactor Pilot Framework Banner" width="100%" />
 </p>
 
-# Refactor Pilot
+# Refactor Pilot Framework
 
 **A systematic, AI-assisted framework for safely refactoring legacy codebases.**
 
-Refactor Pilot gives you a repeatable, four-phase process for using large language models (LLMs) to understand, test, transform, and verify code — turning weeks of manual refactoring into hours of guided, AI-accelerated work.
+Refactor Pilot Framework gives you a repeatable, four-phase process for using large language models (LLMs) to understand, test, transform, and verify code — turning weeks of manual refactoring into hours of guided, AI-accelerated work.
 
 Whether you use Claude, ChatGPT, Copilot, Cursor, or any other AI coding tool, the prompts and scripts in this repo are designed to be **tool-agnostic** and **copy-paste ready**. If you use [Claude Code](https://docs.anthropic.com/en/docs/claude-code), you can drop the included skills directly into your workflow for an even more integrated experience.
 
@@ -18,7 +18,7 @@ Every codebase has that one corner nobody wants to touch. The authentication mod
 
 Technical debt doesn't happen overnight — it accumulates one shortcut at a time until the cost of changing anything exceeds the cost of just building around it. And now you've got a codebase that works, but nobody can confidently modify it without breaking something unexpected.
 
-AI changes the economics of this problem. What used to require a senior developer spending days carefully tracing dependencies and hand-rewriting modules can now be done in a fraction of the time — but only if you approach it methodically. Pasting your whole codebase into a chat window and asking "fix this" is not a strategy. You need structure: understand first, protect behavior with tests, transform with a plan, then verify everything. That's the process Refactor Pilot gives you.
+AI changes the economics of this problem. What used to require a senior developer spending days carefully tracing dependencies and hand-rewriting modules can now be done in a fraction of the time — but only if you approach it methodically. Pasting your whole codebase into a chat window and asking "fix this" is not a strategy. You need structure: understand first, protect behavior with tests, transform with a plan, then verify everything. That's the process Refactor Pilot Framework gives you.
 
 ### What You Get
 
@@ -35,7 +35,7 @@ AI changes the economics of this problem. What used to require a senior develope
 
 ### Option 1: Install via Claude Code Marketplace (Easiest)
 
-If you have [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed, you can add the Refactor Pilot marketplace and install the plugin directly from your terminal:
+If you have [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed, you can add the Refactor Pilot Framework marketplace and install the plugin directly from your terminal:
 
 ```bash
 # Add the marketplace
@@ -75,7 +75,7 @@ That's it. All four skills (`analyze-codebase`, `generate-tests`, `refactor-code
 **Recommended approach — clone the full repo alongside your project:**
 
 ```bash
-# Clone Refactor Pilot somewhere accessible
+# Clone Refactor Pilot Framework somewhere accessible
 git clone https://github.com/GuilhermeVozniak/refactor-pilot-framework.git ~/refactor-pilot-framework
 
 # From your project directory, copy the skills into .claude/skills/

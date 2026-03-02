@@ -190,7 +190,7 @@ AI makes it dangerously easy to build prototypes. In a few hours you can have a 
 
 **The gap:** In real-world projects, only about a third of commits are features. The rest is everything that makes software survive contact with real users — bug fixes, error handling, security hardening, deployment configuration, monitoring, documentation, and edge case coverage. AI-generated prototypes typically skip all of this.
 
-**How to cross the gap:** If you've used AI to build a prototype and now need to harden it for production, the Refactor Pilot framework is exactly the right tool. Treat the prototype as the "legacy code" in Phase 1, analyze it thoroughly, then use Phases 2-4 to add the safety nets, fix the shortcuts, and deploy properly. Specifically:
+**How to cross the gap:** If you've used AI to build a prototype and now need to harden it for production, the Refactor Pilot Framework is exactly the right tool. Treat the prototype as the "legacy code" in Phase 1, analyze it thoroughly, then use Phases 2-4 to add the safety nets, fix the shortcuts, and deploy properly. Specifically:
 
 1. **Phase 1:** Analyze the prototype for missing error handling, hardcoded values, security gaps, and untested paths
 2. **Phase 2:** Generate comprehensive tests for the existing behavior, then build a plan to harden the weak spots

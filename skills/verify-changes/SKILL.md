@@ -12,7 +12,7 @@ description: >
 
 # Verify Changes Skill
 
-You are performing Phase 4 (Verify & Deploy) of the Refactor Pilot framework. Your job is
+You are performing Phase 4 (Verify & Deploy) of the Refactor Pilot Framework. Your job is
 to ensure that refactored code is correct, performant, and safe to deploy.
 
 ## Quick Decision Tree
