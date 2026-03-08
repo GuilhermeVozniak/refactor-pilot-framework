@@ -11,6 +11,7 @@ Skills are designed for Claude Code but the underlying methodology works with an
 | `generate-tests` | 2 | Create safety nets | "generate tests", "add tests before refactoring" |
 | `refactor-code` | 3 | Transform the code | "refactor this", "convert to hooks", "modernize" |
 | `verify-changes` | 4 | Validate and deploy | "verify the refactoring", "is it safe to deploy" |
+| `design-patterns` | 1-3 | Identify & apply GoF patterns | "which patterns fit", "apply strategy pattern", "identify code smells" |
 
 ## Skill Details
 
@@ -68,6 +69,23 @@ generates a tailored verification checklist, and recommends a deployment strateg
 
 **References:** `references/deployment-strategies.md`
 
+---
+
+### design-patterns
+
+**Location:** `skills/design-patterns/`
+
+Identifies and applies Gang of Four (GoF) design patterns from the Refactoring Guru catalog.
+Works standalone or as a companion to analyze-codebase (Phase 1) and refactor-code (Phase 3).
+Covers all 22 classic patterns across three categories: Creational (Factory Method, Abstract
+Factory, Builder, Prototype, Singleton), Structural (Adapter, Bridge, Composite, Decorator,
+Facade, Flyweight, Proxy), and Behavioral (Chain of Responsibility, Command, Iterator,
+Mediator, Memento, Observer, State, Strategy, Template Method, Visitor).
+
+**Outputs:** Pattern identification reports, refactored code with pattern documentation
+
+**References:** `references/creational-patterns.md`, `references/structural-patterns.md`, `references/behavioral-patterns.md`
+
 ## Installation
 
 ### Prerequisites
@@ -114,10 +132,16 @@ your-project/
 │       │   ├── SKILL.md              # Phase 3 skill
 │       │   └── references/
 │       │       └── pattern-conversions.md
-│       └── verify-changes/
-│           ├── SKILL.md              # Phase 4 skill
+│       ├── verify-changes/
+│       │   ├── SKILL.md              # Phase 4 skill
+│       │   └── references/
+│       │       └── deployment-strategies.md
+│       └── design-patterns/
+│           ├── SKILL.md              # Design patterns skill
 │           └── references/
-│               └── deployment-strategies.md
+│               ├── creational-patterns.md
+│               ├── structural-patterns.md
+│               └── behavioral-patterns.md
 ├── scripts/
 │   ├── analyze-project.sh
 │   ├── map-file-structure.sh
@@ -185,6 +209,7 @@ ln -s ../../.refactor-pilot-framework/skills/analyze-codebase .claude/skills/ana
 ln -s ../../.refactor-pilot-framework/skills/generate-tests .claude/skills/generate-tests
 ln -s ../../.refactor-pilot-framework/skills/refactor-code .claude/skills/refactor-code
 ln -s ../../.refactor-pilot-framework/skills/verify-changes .claude/skills/verify-changes
+ln -s ../../.refactor-pilot-framework/skills/design-patterns .claude/skills/design-patterns
 ```
 
 ### Verifying the Installation
@@ -194,6 +219,7 @@ Open Claude Code in your project directory and try one of these:
 - "analyze this codebase" → should trigger the `analyze-codebase` skill
 - "generate tests for this module" → should trigger the `generate-tests` skill
 - "refactor this file" → should trigger the `refactor-code` skill
+- "which design patterns should I use here" → should trigger the `design-patterns` skill
 
 Claude will automatically pick up skills from `.claude/skills/` and use them
 when it detects a matching request.

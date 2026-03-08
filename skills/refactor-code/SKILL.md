@@ -68,7 +68,10 @@ For each extraction:
 ### Pass 2: Convert Patterns
 
 Apply modern pattern conversions as specified in the refactor plan.
-See `references/pattern-conversions.md` for conversion guides.
+See `references/pattern-conversions.md` for language-level conversions and GoF design
+pattern transformations. If `refactor-notes/03c-pattern-opportunities.md` exists (from
+the analyze-codebase skill), use it to guide which design patterns to apply.
+For detailed pattern reference, see `skills/design-patterns/references/`.
 
 For each conversion:
 - Preserve ALL existing behavior

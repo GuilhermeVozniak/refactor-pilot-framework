@@ -122,7 +122,39 @@ Feed this into the refactor plan in Phase 2.
 
 Save as `refactor-notes/05-security-analysis.md`.
 
-### Step 8: Generate Architecture Diagram
+### Step 8: Identify Design Pattern Opportunities
+
+Scan the analyzed code for structural issues that design patterns can solve. Use the
+smell → pattern mapping to identify candidates:
+
+| Code Smell Found | Candidate Pattern(s) |
+|---|---|
+| Giant `if/else` or `switch` on type | Strategy, State, Command |
+| Copy-pasted logic with minor variations | Template Method, Strategy |
+| Constructor with 5+ parameters | Builder |
+| `new` keyword scattered everywhere | Factory Method, Abstract Factory |
+| God class doing too many things | Facade, Mediator, Command |
+| Tight coupling between modules | Observer, Mediator, Bridge |
+| Adding features requires modifying existing code | Decorator, Strategy, Visitor |
+| Complex object creation logic | Builder, Factory Method, Prototype |
+| Need to support undo/history | Memento, Command |
+| Traversing complex structures | Iterator, Composite, Visitor |
+| Different behavior for different states | State |
+| Adapting incompatible interfaces | Adapter, Facade |
+| Controlling access to expensive resources | Proxy, Flyweight |
+
+For each identified opportunity, note:
+- The file(s) and code area affected
+- The pattern that fits and why
+- Estimated complexity to apply (LOW / MEDIUM / HIGH)
+- Whether to address it in this refactoring cycle or defer
+
+Save pattern opportunities to `refactor-notes/03c-pattern-opportunities.md`.
+
+For detailed pattern descriptions and application guides, see the `design-patterns` skill
+and its reference docs (`skills/design-patterns/references/`).
+
+### Step 9: Generate Architecture Diagram
 
 Produce a text-based architecture diagram from the analysis outputs showing how major
 modules connect. Use arrows for data flow and dependency direction. Group files by
@@ -130,7 +162,7 @@ feature area or layer.
 
 Include the diagram in the project summary.
 
-### Step 9: Project Summary
+### Step 10: Project Summary
 
 Synthesize all outputs into a single document covering:
 
@@ -139,6 +171,7 @@ Synthesize all outputs into a single document covering:
 - Key data flows
 - Dependency health
 - Code quality assessment
+- Design pattern opportunities (from Step 8)
 - Refactoring priority map (ranked by impact and effort)
 - Risks and considerations
 

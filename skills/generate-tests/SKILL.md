@@ -114,8 +114,10 @@ Generate a detailed refactoring plan with:
 2. Target file/directory structure
 3. Step-by-step changes (each small enough for a single commit)
 4. New utilities and types to create
-5. Breaking changes and migration paths
-6. Risk assessment per step
+5. Design patterns to introduce (if `refactor-notes/03c-pattern-opportunities.md` exists,
+   incorporate HIGH-priority patterns into the plan; see `skills/design-patterns/` for guides)
+6. Breaking changes and migration paths
+7. Risk assessment per step
 
 Present the refactor plan to the user for approval.
 

@@ -23,7 +23,7 @@ AI changes the economics of this problem. What used to require a senior develope
 ### What You Get
 
 - A **four-phase methodology** that mirrors how senior engineers refactor, augmented with AI at every step
-- **15 ready-to-use prompt templates** for codebase analysis, test generation, refactor planning, and code transformation — including file-type-specific variants for components, configs, utilities, and stylesheets
+- **17 ready-to-use prompt templates** for codebase analysis, test generation, refactor planning, code transformation, and design pattern identification — including file-type-specific variants for components, configs, utilities, and stylesheets
 - **Automation scripts** (Bash) for extracting project metadata, mapping file structures, capturing baselines, and analyzing code — zero dependencies, runs on any Unix system
 - **Claude Code skills** with progressive disclosure (quick decision trees + reference docs) for a fully integrated refactoring workflow
 - **Strategy guides** for model selection, code anonymization, and creating domain-expert skills
@@ -45,7 +45,7 @@ If you have [Claude Code](https://docs.anthropic.com/en/docs/claude-code) instal
 /plugin install refactor-pilot@refactor-pilot-marketplace
 ```
 
-That's it. All four skills (`analyze-codebase`, `generate-tests`, `refactor-code`, `verify-changes`) will be available in your Claude Code sessions. Updates are pulled automatically when the marketplace is refreshed.
+That's it. All five skills (`analyze-codebase`, `generate-tests`, `refactor-code`, `verify-changes`, `design-patterns`) will be available in your Claude Code sessions. Updates are pulled automatically when the marketplace is refreshed.
 
 ### Option 2: Use the Prompt Templates (Any AI Tool)
 
@@ -91,11 +91,12 @@ cp -r ~/refactor-pilot-framework/scripts/ /path/to/your/project/scripts/
 # Create the Claude Code skills directory in your project
 mkdir -p /path/to/your/project/.claude/skills
 
-# Copy all four skills
+# Copy all five skills
 cp -r skills/analyze-codebase /path/to/your/project/.claude/skills/
 cp -r skills/generate-tests   /path/to/your/project/.claude/skills/
 cp -r skills/refactor-code    /path/to/your/project/.claude/skills/
 cp -r skills/verify-changes   /path/to/your/project/.claude/skills/
+cp -r skills/design-patterns  /path/to/your/project/.claude/skills/
 ```
 
 **Verify the installation** — your project structure should look like:
@@ -113,7 +114,10 @@ your-project/
 │       ├── refactor-code/
 │       │   ├── SKILL.md
 │       │   └── references/
-│       └── verify-changes/
+│       ├── verify-changes/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       └── design-patterns/
 │           ├── SKILL.md
 │           └── references/
 ├── src/
@@ -199,6 +203,7 @@ With tests in place and a plan approved, AI rewrites the code. This is where the
 **What happens:**
 - AI extracts shared utilities and helper functions
 - Converts legacy patterns (e.g., class components → hooks, callbacks → async/await)
+- Applies design patterns where identified (Strategy, Factory, Observer, Decorator, etc.)
 - Restructures files and modules according to the refactor plan
 - Adds inline documentation and type annotations
 - Explains its decisions so you can catch misunderstandings early
@@ -259,7 +264,9 @@ refactor-pilot-framework/
 │   ├── 06-test-generation.md          # Phase 2: generate test code
 │   ├── 07-refactor-plan.md            # Phase 2: step-by-step blueprint
 │   ├── 08-code-transform.md           # Phase 3: extract, convert, restructure
-│   └── 09-verify-checklist.md         # Phase 4: tailored verification checklist
+│   ├── 09-verify-checklist.md         # Phase 4: tailored verification checklist
+│   ├── 10-identify-patterns.md        # Design patterns: identify opportunities
+│   └── 11-apply-pattern.md            # Design patterns: apply a specific pattern
 │
 ├── scripts/                           # Automation scripts (Bash, zero dependencies)
 │   ├── analyze-project.sh             # Extract project metadata
@@ -281,10 +288,16 @@ refactor-pilot-framework/
 │   │   ├── SKILL.md                   # Phase 3 skill with decision tree
 │   │   └── references/
 │   │       └── pattern-conversions.md # Legacy → modern pattern guides
-│   └── verify-changes/
-│       ├── SKILL.md                   # Phase 4 skill with decision tree
+│   ├── verify-changes/
+│   │   ├── SKILL.md                   # Phase 4 skill with decision tree
+│   │   └── references/
+│   │       └── deployment-strategies.md # Feature flags, canary, blue-green
+│   └── design-patterns/
+│       ├── SKILL.md                   # Design pattern identification & application
 │       └── references/
-│           └── deployment-strategies.md # Feature flags, canary, blue-green
+│           ├── creational-patterns.md # Factory, Builder, Singleton, Prototype, Abstract Factory
+│           ├── structural-patterns.md # Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy
+│           └── behavioral-patterns.md # Strategy, Observer, Command, State, Chain of Resp., and more
 │
 ├── examples/                          # Example outputs
 │   ├── sample-project-profile.md
