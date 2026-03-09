@@ -236,8 +236,10 @@ refactor-pilot-framework/
 ├── LICENSE                            # MIT License
 ├── CONTRIBUTING.md                    # How to contribute
 ├── agents.md                          # Skill registry and installation guide
-├── plugin.json                        # Claude Code plugin manifest
-├── marketplace.json                   # Claude Code marketplace registry
+│
+├── .claude-plugin/                    # Claude Code plugin metadata
+│   ├── plugin.json                    # Claude Code plugin manifest
+│   └── marketplace.json               # Claude Code marketplace registry
 │
 ├── docs/                              # Detailed phase guides
 │   ├── phase-1-gather-insights.md     # Phase 1 with coverage, baselines, arch diagrams
