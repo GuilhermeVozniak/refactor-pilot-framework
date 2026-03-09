@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "refactor-pilot",
-      "source": ".",
+      "source": "./",
       "description": "Four-phase AI refactoring framework: analyze, test, transform, verify",
       "version": "1.0.0"
     }
